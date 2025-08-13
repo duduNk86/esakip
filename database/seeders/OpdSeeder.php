@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Opd;
 
-class UserSeeder extends Seeder
+class OpdSeeder extends Seeder
 {
     /**
      * Run the database seeds.

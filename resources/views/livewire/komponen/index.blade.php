@@ -104,7 +104,9 @@
                                     </td>
                                     <td class="px-4 py-2 align-top">{{ $komponen->aspek->kode }}</td>
                                     <td class="px-4 py-2 align-top">{{ $komponen->kode }}</td>
-                                    <td class="px-4 py-2 max-w-[700px] break-words whitespace-normal text-justify align-top">{{ $komponen->keterangan }}</td>
+                                    <td
+                                        class="px-4 py-2 max-w-[700px] break-words whitespace-normal text-justify align-top">
+                                        {{ $komponen->keterangan }}</td>
                                     <td class="px-4 py-2 align-top">{{ $komponen->bobot }}%</td>
                                     <td class="px-4 py-2 space-x-2 flex items-center align-top">
                                         <a wire:click="showEditForm('{{ $encryptedId }}')" href="#"
@@ -128,7 +130,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center py-4">Tidak ada data</td>
+                                    <td colspan="6" class="text-center py-4">Tidak ada data</td>
                                 </tr>
                             @endforelse
                         </tbody>

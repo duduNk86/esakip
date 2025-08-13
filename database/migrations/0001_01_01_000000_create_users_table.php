@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('role')->default('user'); // nilai: superadmin, penilai, user, viewer
-            $table->string('nowa', 20);
+            $table->string('nowa', 20)->nullable();
             $table->unsignedBigInteger('opd_id')->nullable();
             $table->enum('active', ['1', '0']);
             $table->timestamps();
