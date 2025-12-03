@@ -40,7 +40,8 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
         // Baris 2: SISTEM AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (SAKIP)
         $rows->push(['SISTEM AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (SAKIP)']);
         // Baris 3: TAHUN XXXX
-        $rows->push(['TAHUN ' . $this->penilaianOpd->periode->tahun]);
+        $rows->push([strtoupper($this->penilaianOpd->opd->nama_opd)]);
+        // $rows->push(['TAHUN ' . $this->penilaianOpd->periode->tahun]);
         // Baris kosong untuk jarak
         $rows->push(['']);
 
@@ -48,29 +49,19 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
         // Baris 5: Nomor LKE / Perangkat Daerah
         $rows->push([
             'Nomor LKE',
-            ': ' . ($this->penilaianOpd->nomor_lke ?? '....../....../LKE-SAKIP/' . $this->penilaianOpd->periode->tahun),
+            ': ' . ($this->penilaianOpd->nomor_lke ?? '700.1.2.1/............./' . $this->penilaianOpd->periode->tahun),
             '', // Sel kosong untuk merge
             '', // Sel kosong untuk merge
-            'Perangkat Daerah',
-            ': ' . $this->penilaianOpd->opd->nama_opd,
+            'Periode Evaluasi',
+            ': ' . $this->penilaianOpd->periode->tahun,
             '', // Sel kosong untuk merge
             '', // Sel kosong untuk merge
         ]);
         // Baris 6: Disusun Oleh / Periode Evaluasi
         $rows->push([
             'Disusun Oleh',
-            ': ' . ($this->penilaianOpd->user->name ?? '-'),
-            '',
-            '',
-            'Periode Evaluasi',
-            ': ' . $this->penilaianOpd->periode->tahun,
-            '',
-            ''
-        ]);
-        // Baris 7: Direviu Oleh / Skor Evaluasi
-        $rows->push([
-            'Direviu Oleh',
-            ': ' . ($this->penilaianOpd->penilai->name ?? '-'),
+            ': ' . '',
+            // ': ' . ($this->penilaianOpd->user->name ?? '-'),
             '',
             '',
             'Skor Evaluasi',
@@ -78,10 +69,11 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
             '',
             ''
         ]);
-        // Baris 8: Disetujui Oleh / Nilai Evaluasi
+        // Baris 7: Direviu Oleh / Skor Evaluasi
         $rows->push([
-            'Disetujui Oleh',
-            ': Inspektur Daerah',
+            'Direviu Oleh',
+            ': ' . '',
+            // ': ' . ($this->penilaianOpd->penilai->name ?? '-'),
             '',
             '',
             'Nilai Evaluasi',
@@ -89,21 +81,19 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
             '',
             ''
         ]);
-        // Baris 9: Predikat
+        // Baris 8: Disetujui Oleh / Nilai Evaluasi
         $rows->push([
+            'Disetujui Oleh',
+            ':',
             '',
             '',
-            '',
-            '', // Kolom kosong di kiri
             'Predikat',
             ': ' . $this->formatPredikat($this->penilaianOpd->predikat),
             '',
-            '',
-            '' // Sel kosong untuk merge
+            ''
         ]);
 
         // Dua baris kosong sebagai pemisah sebelum tabel utama
-        $rows->push(['']);
         $rows->push(['']);
 
         // --- Bagian Header Tabel Utama ---
@@ -295,7 +285,7 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
 
                 // --- Styling Summary Table (Baris 5-9) ---
                 $summaryStartRow = 5;
-                $summaryEndRow = 9;
+                $summaryEndRow = 8;
 
                 // Merge cell untuk nilai-nilai di summary table
                 $sheet->mergeCells('B' . $summaryStartRow . ':D' . $summaryStartRow); // Nomor LKE Value
@@ -303,11 +293,10 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
                 $sheet->mergeCells('B' . ($summaryStartRow + 2) . ':D' . ($summaryStartRow + 2)); // Direviu Oleh Value
                 $sheet->mergeCells('B' . ($summaryStartRow + 3) . ':D' . ($summaryStartRow + 3)); // Disetujui Oleh Value
 
-                $sheet->mergeCells('F' . $summaryStartRow . ':I' . $summaryStartRow); // Perangkat Daerah Value
-                $sheet->mergeCells('F' . ($summaryStartRow + 1) . ':I' . ($summaryStartRow + 1)); // Periode Evaluasi Value
-                $sheet->mergeCells('F' . ($summaryStartRow + 2) . ':I' . ($summaryStartRow + 2)); // Skor Evaluasi Value
-                $sheet->mergeCells('F' . ($summaryStartRow + 3) . ':I' . ($summaryStartRow + 3)); // Nilai Evaluasi Value
-                $sheet->mergeCells('F' . ($summaryStartRow + 4) . ':I' . ($summaryStartRow + 4)); // Predikat Value (Summary table)
+                $sheet->mergeCells('F' . $summaryStartRow . ':I' . $summaryStartRow); // Periode Evaluasi Value
+                $sheet->mergeCells('F' . ($summaryStartRow + 1) . ':I' . ($summaryStartRow + 1)); // Skor Evaluasi Value
+                $sheet->mergeCells('F' . ($summaryStartRow + 2) . ':I' . ($summaryStartRow + 2)); // Nilai Evaluasi Value
+                $sheet->mergeCells('F' . ($summaryStartRow + 3) . ':I' . ($summaryStartRow + 3)); // Predikat Value (Summary table)
 
                 // Styling text di summary table
                 $sheet->getStyle('A' . $summaryStartRow . ':I' . $summaryEndRow)->getFont()->setSize(10);
@@ -316,9 +305,9 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
                 $sheet->getStyle('A' . $summaryStartRow . ':I' . $summaryEndRow)->getAlignment()->setVertical(Alignment::VERTICAL_TOP);
 
 
-                // --- Styling Header Tabel Utama (Baris 12-13 setelah 2 baris kosong) ---
-                $mainTableHeaderRow1 = 12; // Disesuaikan dengan jumlah baris di atasnya
-                $mainTableHeaderRow2 = 13;
+                // --- Styling Header Tabel Utama (Baris 10-11 setelah 1 baris kosong) ---
+                $mainTableHeaderRow1 = 10; // Disesuaikan dengan jumlah baris di atasnya
+                $mainTableHeaderRow2 = 11;
 
                 // Merge cells untuk "Skor Penilaian"
                 $sheet->mergeCells('F' . $mainTableHeaderRow1 . ':G' . $mainTableHeaderRow1);

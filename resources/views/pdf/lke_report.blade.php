@@ -174,8 +174,8 @@
 <body>
     <div class="header">
         <h1>LEMBAR KERJA EVALUASI</h1>
-        <p>PENILAIAN AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (SAKIP) TAHUN {{ $penilaianOpd->periode->tahun }}</p>
-        {{-- <p>TAHUN {{ $penilaianOpd->periode->tahun }}</p> --}}
+        <p>PENILAIAN AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (SAKIP)</p>
+        <p>{{ strtoupper($penilaianOpd->opd->nama_opd) }}</p>
     </div>
 
     <div class="summary-container clearfix">
@@ -183,13 +183,16 @@
             <table class="summary-table">
                 <tr>
                     <th>Nomor LKE</th>
-                    <td>: {{ $penilaianOpd->nomor_lke ?? '....../....../LKE-SAKIP/' . $penilaianOpd->periode->tahun }}
+                    <td>:
+                        {{ $penilaianOpd->nomor_lke ?? '700.1.2.1/' }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{ '/' . $penilaianOpd->periode->tahun }}
                     </td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <th>Perangkat Daerah</th>
                     <td>: {{ $penilaianOpd->opd->nama_opd }}</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <th>Disusun Oleh</th>
                     <td>: </td>

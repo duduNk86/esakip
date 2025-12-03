@@ -21,7 +21,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
     public function generateCaptcha(): void
     {
-        $this->captchaText = substr(str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnopqrstuvwqyz0123456789'), 0, 6);
+        $this->captchaText = substr(str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwqyz0123456789'), 0, 6);
         Session::put('captcha_value', $this->captchaText);
     }
 

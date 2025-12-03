@@ -3,7 +3,7 @@
     @if (now()->year != 2025)
         - {{ now()->year }}
     @endif
-    | PENAKs`E <a href="https://website.wonosobokab.go.id" target="_blank"
+    | PENAKs`E <a href="https://inspektorat.wonosobokab.go.id" target="_blank"
         class="text-blue-600 hover:underline">Inspektorat Daerah Kabupaten
         Wonosobo</a><br>Powered by <a href="https://diskominfo.wonosobokab.go.id/" target="_blank"
         class="text-blue-600 hover:underline">Diskominfo</a> |

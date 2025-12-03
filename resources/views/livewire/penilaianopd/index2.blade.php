@@ -2,7 +2,8 @@
     {{-- History Url --}}
     <div class="container max-w-full mx-auto py-2 bg-white text-xs">
         <div class="flex justify-end items-center pr-12">
-            <span class="text-gray-600"><a href="{{ route('dashboard.index') }}" class="text-blue-600 ml-1">Home</a> / </span>
+            <span class="text-gray-600"><a href="{{ route('dashboard.index') }}" class="text-blue-600 ml-1">Home</a> /
+            </span>
             <a href="#" class="text-gray-600 ml-1">{{ $titleHistoryUrl }}</a>
         </div>
     </div>
@@ -450,7 +451,7 @@
                                                     const dropdown = this.$refs.dropdown;
                                                     const rect = dropdown.getBoundingClientRect();
                                                     const spaceBelow = window.innerHeight - rect.top;
-
+                                        
                                                     this.dropUp = spaceBelow < 200;
                                                 });
                                             }
@@ -607,7 +608,7 @@
                                                         </a>
                                                     @endif
 
-                                                    {{-- Download LKE --}}
+                                                    {{-- Download Excel LKE --}}
                                                     @if (auth()->user()?->role === 'superadmin' ||
                                                             ((auth()->user()?->role === 'penilai' &&
                                                                 ($penilaianopd->penilai_id === auth()->user()?->id) === $penilaianopd->penilai_id &&
@@ -627,7 +628,7 @@
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                                             </svg>
-                                                            Download
+                                                            Excel
                                                         </a>
                                                     @endif
 
