@@ -69,7 +69,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
     private function verifyRecaptcha(string $token): bool
     {
-        $secret = env('RECAPTCHA_SECRET_KEY');
+        $secret = config('services.recaptcha.secret');
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => $secret,
             'response' => $token,
@@ -227,11 +227,11 @@ new #[Layout('layouts.guest')] class extends Component {
         </footer>
 
     </div>
-    <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.sitekey') }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             grecaptcha.ready(function() {
-                grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {
+                grecaptcha.execute('{{ config('services.recaptcha.sitekey') }}', {
                     action: 'login'
                 }).then(function(token) {
                     Livewire.dispatch('recaptchaToken', {
