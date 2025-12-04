@@ -263,7 +263,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex flex-col items-center">
+                {{-- <div class="flex flex-col items-center">
                     <div
                         class="bg-green-100 p-6 rounded-xl shadow hover:shadow-xl transition-transform duration-300 transform hover:scale-105 hover:-translate-y-2">
                         <i class="fa-solid fa-5 text-4xl text-green-800 opacity-75 mb-4"></i>
@@ -271,7 +271,7 @@
                         <p class="text-gray-600">Perangkat Daerah diberikan kesempatan sanggah atas hasil Evaluasi dan
                             Penilaian LKE sesuai jadwal yang ditetapkan.</p>
                     </div>
-                </div>
+                </div> --}}
                 <div class="flex flex-col items-center">
                     <div
                         class="bg-green-100 p-6 rounded-xl shadow hover:shadow-xl transition-transform duration-300 transform hover:scale-105 hover:-translate-y-2">
