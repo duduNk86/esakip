@@ -71,11 +71,13 @@
                                             };
                                         @endphp
                                         <span
-                                            class="border border-gray-200 px-2 py-1 rounded-full text-xs font-semibold {{ $badgeClass }}">
-                                            @if ( $status === '1')
+                                            class="border border-gray-200 px-2 py-1 rounded-full text-xs font-semibold cursor-pointer {{ $badgeClass }}"
+                                            wire:click="toggleStatus('{{ Crypt::encrypt($user->id) }}')"
+                                            title="Klik untuk ubah status">
+                                            @if ($status === '1')
                                                 Active
                                             @else
-                                                Off
+                                                Non-Active
                                             @endif
                                         </span>
                                     </td>

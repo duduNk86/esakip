@@ -64,6 +64,19 @@ class Index extends Component
         $this->reset(['resetId', 'resetPassword', 'resetPasswordConfirmation', 'showResetModal']);
     }
 
+    public function toggleStatus($encryptedId)
+    {
+        $id = Crypt::decrypt($encryptedId);
+        $user = User::findOrFail($id);
+
+        // Toggle 1 ↔ 0
+        $user->active = $user->active == '1' ? '0' : '1';
+        $user->save();
+
+        // Beri notifikasi (SweetAlert)
+        $this->dispatch('show-toast', message: 'Status user berhasil diubah.');
+    }
+
     public function render()
     {
         $users = User::query()
