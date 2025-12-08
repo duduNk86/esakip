@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('periode_id')->constrained('periodes')->onDelete('no action');
             $table->foreignId('opd_id')->constrained('opds')->onDelete('no action');
             $table->foreignId('user_id')->constrained('users')->onDelete('no action');
-            $table->bigInteger('penilai_id');
+            $table->bigInteger('penilai_id')->nullable();
             $table->enum('status', ['SAQ', 'Penilaian', 'Final', 'Pengumuman']);
             $table->timestamp('tgl_submit_opd')->nullable();
             $table->decimal('skor_by_opd', 5, 2)->nullable();
