@@ -201,7 +201,7 @@ new #[Layout('layouts.guest')] class extends Component {
             @endif
             | PENAKs`E <a href="https://inspektorat.wonosobokab.go.id" target="_blank"
                 class="text-blue-600 hover:underline">Inspektorat
-                Daerah Kabupaten
+                Daerah Kab.
                 Wonosobo</a><br>Powered by <a href="https://diskominfo.wonosobokab.go.id/" target="_blank"
                 class="text-blue-600 hover:underline">Diskominfo</a> |
             Mas@guNk86
