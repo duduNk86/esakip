@@ -83,102 +83,20 @@
                                         {{-- Jawaban OPD --}}
                                         @if (auth()->user()?->role === 'superadmin' || auth()->user()?->role === 'user')
                                             <div class="flex flex-wrap md:flex-nowrap items-end gap-2">
-
-                                                {{-- Saya Edit sampai disini, nunggu info dari Inspektorat --}}
-
-                                                @if ($sub->id == 1 || $sub->id == 2 || $sub->id == 3 || $sub->id == 4 || $sub->id == 5 || $sub->id == 28 || $sub->id == 29 || $sub->id == 30 || $sub->id == 49 || $sub->id == 50 || $sub->id == 51 || $sub->id == 52 || $sub->id == 53 || $sub->id == 70 || $sub->id == 71 || $sub->id == 72)
-                                                    <div class="w-full md:w-5/6">
-                                                        <label class="block mt-2 text-sm font-bold">
-                                                            Jawaban
-                                                        </label>
-                                                        <select type="text" wire:model.live="jawaban_opd.{{ $sub->id }}"
-                                                            class="w-full mt-1 border rounded px-3 py-2 text-sm">
-                                                            <option value="">- Pilih -</option>
-                                                            <option value="0">
-                                                                a. Jika sama sekali tidak ada upaya dalam pemenuhan
-                                                                kriteria
-                                                                penialaian akuntabilitas kinerja
+                                                <div class="w-full md:w-5/6">
+                                                    <label class="block mt-2 text-sm font-bold">
+                                                        Jawaban
+                                                    </label>
+                                                    <select wire:model.live="jawaban_opd.{{ $sub->id }}"
+                                                        class="w-full mt-1 border rounded px-3 py-2 text-sm">
+                                                        <option value="">- Pilih -</option>
+                                                        @foreach ($sub->tipeJawaban->opsi ?? [] as $opsi)
+                                                            <option value="{{ $opsi->nilai }}">
+                                                                {{ $opsi->label }}
                                                             </option>
-                                                            <option value="30">
-                                                                b. Jika kriteria penilaian akuntabilitas kinerja telah
-                                                                mulai
-                                                                dipenuhi (>0%-25%)
-                                                            </option>
-                                                            <option value="50">
-                                                                c. Jika kualitas sebagian kecil kriteria telah terpenuhi
-                                                                (>25%-50%)
-                                                            </option>
-                                                            <option value="60">
-                                                                d. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>50%-75%)
-                                                            </option>
-                                                            <option value="70">
-                                                                e. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>75%-100%)
-                                                            </option>
-                                                            <option value="80">
-                                                                f. Jika kualitas seluruh kriteria telah terpenuhi (100%)
-                                                                sesuai
-                                                                dengan mandat kebijakan nasional
-                                                            </option>
-                                                            <option value="90">
-                                                                g. Jika seluruh kriteria telah terpenuhi (100%) dan
-                                                                telah
-                                                                dipertahankan dalam setidaknya 1 tahun terakhir
-                                                            </option>
-                                                            <option value="100">
-                                                                h. Jika seluruh kriteria telah terpenuhi (100%) dan
-                                                                telah
-                                                                dipertahankan dalam setidaknya 5 tahun terakhir
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                @else
-                                                    <div class="w-full md:w-5/6">
-                                                        <label class="block mt-2 text-sm font-bold">
-                                                            Jawaban
-                                                        </label>
-                                                        <select type="text" wire:model.live="jawaban_opd.{{ $sub->id }}"
-                                                            class="w-full mt-1 border rounded px-3 py-2 text-sm">
-                                                            <option value="">- Pilih -</option>
-                                                            <option value="0">
-                                                                a. Jika sama sekali tidak ada upaya dalam pemenuhan
-                                                                kriteria
-                                                                penialaian akuntabilitas kinerja
-                                                            </option>
-                                                            <option value="30">
-                                                                b. Jika kriteria penilaian akuntabilitas kinerja telah
-                                                                mulai
-                                                                dipenuhi (>0%-25%)
-                                                            </option>
-                                                            <option value="50">
-                                                                c. Jika kualitas sebagian kecil kriteria telah terpenuhi
-                                                                (>25%-50%)
-                                                            </option>
-                                                            <option value="60">
-                                                                d. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>50%-75%)
-                                                            </option>
-                                                            <option value="70">
-                                                                e. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>75%-100%)
-                                                            </option>
-                                                            <option value="80">
-                                                                f. Jika kualitas seluruh kriteria telah terpenuhi (100%)
-                                                                sesuai
-                                                                dengan mandat kebijakan nasional
-                                                            </option>
-                                                            <option value="90">
-                                                                g. Jika kualitas seluruh kriteria telah terpenuhi (100%) dan terdapat
-                                                                beberapa upaya yang bisa dihargai dari pemenuhan kriteria tersebut
-                                                            </option>
-                                                            <option value="100">
-                                                                h. Jika kualitas seluruh kriteria telah terpenuhi (100%) dan terdapat upaya
-                                                                inovatif serta layak menjadi percontohan secara nasional
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                                 <div class="w-full md:w-1/6">
                                                     <label class="block mt-2 text-sm font-bold">
                                                         Skor
@@ -194,93 +112,20 @@
                                                 class="w-full mt-1 border rounded px-3 py-2 text-sm">
                                         @elseif (auth()->user()?->role === 'penilai')
                                             <div class="flex flex-wrap md:flex-nowrap items-end gap-2">
-                                                @if ($sub->id == 1 || $sub->id == 2 || $sub->id == 3 || $sub->id == 4 || $sub->id == 5 || $sub->id == 28 || $sub->id == 29 || $sub->id == 30 || $sub->id == 49 || $sub->id == 50 || $sub->id == 51 || $sub->id == 52 || $sub->id == 53 || $sub->id == 70 || $sub->id == 71 || $sub->id == 72)
-                                                    <div class="w-full md:w-5/6">
-                                                        <label class="block mt-2 text-sm font-bold">
-                                                            Jawaban
-                                                        </label>
-                                                        <select type="text" wire:model.live="jawaban_opd.{{ $sub->id }}"
-                                                            class="w-full mt-1 border rounded px-3 py-2 text-sm" disabled>
-                                                            <option value="">- Pilih -</option>
-                                                            <option value="0">
-                                                                a. Jika sama sekali tidak ada upaya dalam pemenuhan kriteria
-                                                                penialaian akuntabilitas kinerja
+                                                <div class="w-full md:w-5/6">
+                                                    <label class="block mt-2 text-sm font-bold">
+                                                        Jawaban
+                                                    </label>
+                                                    <select wire:model.live="jawaban_opd.{{ $sub->id }}"
+                                                        class="w-full mt-1 border rounded px-3 py-2 text-sm">
+                                                        <option value="">- Pilih -</option>
+                                                        @foreach ($sub->tipeJawaban->opsi ?? [] as $opsi)
+                                                            <option value="{{ $opsi->nilai }}">
+                                                                {{ $opsi->label }}
                                                             </option>
-                                                            <option value="30">
-                                                                b. Jika kriteria penilaian akuntabilitas kinerja telah mulai
-                                                                dipenuhi (>0%-25%)
-                                                            </option>
-                                                            <option value="50">
-                                                                c. Jika kualitas sebagian kecil kriteria telah terpenuhi
-                                                                (>25%-50%)
-                                                            </option>
-                                                            <option value="60">
-                                                                d. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>50%-75%)
-                                                            </option>
-                                                            <option value="70">
-                                                                e. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>75%-100%)
-                                                            </option>
-                                                            <option value="80">
-                                                                f. Jika kualitas seluruh kriteria telah terpenuhi (100%)
-                                                                sesuai
-                                                                dengan mandat kebijakan nasional
-                                                            </option>
-                                                            <option value="90">
-                                                                g. Jika seluruh kriteria telah terpenuhi (100%) dan telah
-                                                                dipertahankan dalam setidaknya 1 tahun terakhir
-                                                            </option>
-                                                            <option value="100">
-                                                                h. Jika seluruh kriteria telah terpenuhi (100%) dan telah
-                                                                dipertahankan dalam setidaknya 5 tahun terakhir
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                @else
-                                                    <div class="w-full md:w-5/6">
-                                                        <label class="block mt-2 text-sm font-bold">
-                                                            Jawaban
-                                                        </label>
-                                                        <select type="text" wire:model.live="jawaban_opd.{{ $sub->id }}"
-                                                            class="w-full mt-1 border rounded px-3 py-2 text-sm" disabled>
-                                                            <option value="">- Pilih -</option>
-                                                            <option value="0">
-                                                                a. Jika sama sekali tidak ada upaya dalam pemenuhan kriteria
-                                                                penialaian akuntabilitas kinerja
-                                                            </option>
-                                                            <option value="30">
-                                                                b. Jika kriteria penilaian akuntabilitas kinerja telah mulai
-                                                                dipenuhi (>0%-25%)
-                                                            </option>
-                                                            <option value="50">
-                                                                c. Jika kualitas sebagian kecil kriteria telah terpenuhi
-                                                                (>25%-50%)
-                                                            </option>
-                                                            <option value="60">
-                                                                d. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>50%-75%)
-                                                            </option>
-                                                            <option value="70">
-                                                                e. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>75%-100%)
-                                                            </option>
-                                                            <option value="80">
-                                                                f. Jika kualitas seluruh kriteria telah terpenuhi (100%)
-                                                                sesuai
-                                                                dengan mandat kebijakan nasional
-                                                            </option>
-                                                            <option value="90">
-                                                                g. Jika kualitas seluruh kriteria telah terpenuhi (100%) dan terdapat
-                                                                beberapa upaya yang bisa dihargai dari pemenuhan kriteria tersebut
-                                                            </option>
-                                                            <option value="100">
-                                                                h. Jika kualitas seluruh kriteria telah terpenuhi (100%) dan terdapat upaya
-                                                                inovatif serta layak menjadi percontohan secara nasional
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                                 <div class="w-full md:w-1/6">
                                                     <label class="block mt-2 text-sm font-bold">
                                                         Skor
@@ -324,93 +169,20 @@
                                         @if (auth()->user()?->role === 'superadmin' || auth()->user()?->role === 'penilai')
                                             <p class="font-bold mt-3 text-red-500">Evaluasi APIP</p>
                                             <div class="flex flex-wrap md:flex-nowrap items-end gap-2">
-                                                @if ($sub->id == 1 || $sub->id == 2 || $sub->id == 3 || $sub->id == 4 || $sub->id == 5 || $sub->id == 28 || $sub->id == 29 || $sub->id == 30 || $sub->id == 49 || $sub->id == 50 || $sub->id == 51 || $sub->id == 52 || $sub->id == 53 || $sub->id == 70 || $sub->id == 71 || $sub->id == 72)
-                                                    <div class="w-full md:w-5/6">
-                                                        <label class="block mt-2 text-sm font-bold">
-                                                            Penilaian
-                                                        </label>
-                                                        <select type="text" wire:model.live="nilai_penilai.{{ $sub->id }}"
-                                                            class="w-full mt-1 border rounded px-3 py-2 text-sm">
-                                                            <option value="">- Pilih -</option>
-                                                            <option value="0">
-                                                                a. Jika sama sekali tidak ada upaya dalam pemenuhan kriteria
-                                                                penialaian akuntabilitas kinerja
+                                                <div class="w-full md:w-5/6">
+                                                    <label class="block mt-2 text-sm font-bold">
+                                                        Penilaian
+                                                    </label>
+                                                    <select wire:model.live="nilai_penilai.{{ $sub->id }}"
+                                                        class="w-full mt-1 border rounded px-3 py-2 text-sm">
+                                                        <option value="">- Pilih -</option>
+                                                        @foreach ($sub->tipeJawaban->opsi ?? [] as $opsi)
+                                                            <option value="{{ $opsi->nilai }}">
+                                                                {{ $opsi->label }}
                                                             </option>
-                                                            <option value="30">
-                                                                b. Jika kriteria penilaian akuntabilitas kinerja telah mulai
-                                                                dipenuhi (>0%-25%)
-                                                            </option>
-                                                            <option value="50">
-                                                                c. Jika kualitas sebagian kecil kriteria telah terpenuhi
-                                                                (>25%-50%)
-                                                            </option>
-                                                            <option value="60">
-                                                                d. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>50%-75%)
-                                                            </option>
-                                                            <option value="70">
-                                                                e. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>75%-100%)
-                                                            </option>
-                                                            <option value="80">
-                                                                f. Jika kualitas seluruh kriteria telah terpenuhi (100%)
-                                                                sesuai
-                                                                dengan mandat kebijakan nasional
-                                                            </option>
-                                                            <option value="90">
-                                                                g. Jika seluruh kriteria telah terpenuhi (100%) dan telah
-                                                                dipertahankan dalam setidaknya 1 tahun terakhir
-                                                            </option>
-                                                            <option value="100">
-                                                                h. Jika seluruh kriteria telah terpenuhi (100%) dan telah
-                                                                dipertahankan dalam setidaknya 5 tahun terakhir
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                @else
-                                                    <div class="w-full md:w-5/6">
-                                                        <label class="block mt-2 text-sm font-bold">
-                                                            Penilaian
-                                                        </label>
-                                                        <select type="text" wire:model.live="nilai_penilai.{{ $sub->id }}"
-                                                            class="w-full mt-1 border rounded px-3 py-2 text-sm">
-                                                            <option value="">- Pilih -</option>
-                                                            <option value="0">
-                                                                a. Jika sama sekali tidak ada upaya dalam pemenuhan kriteria
-                                                                penialaian akuntabilitas kinerja
-                                                            </option>
-                                                            <option value="30">
-                                                                b. Jika kriteria penilaian akuntabilitas kinerja telah mulai
-                                                                dipenuhi (>0%-25%)
-                                                            </option>
-                                                            <option value="50">
-                                                                c. Jika kualitas sebagian kecil kriteria telah terpenuhi
-                                                                (>25%-50%)
-                                                            </option>
-                                                            <option value="60">
-                                                                d. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>50%-75%)
-                                                            </option>
-                                                            <option value="70">
-                                                                e. Jika kualitas sebagian besar kriteria telah terpenuhi
-                                                                (>75%-100%)
-                                                            </option>
-                                                            <option value="80">
-                                                                f. Jika kualitas seluruh kriteria telah terpenuhi (100%)
-                                                                sesuai
-                                                                dengan mandat kebijakan nasional
-                                                            </option>
-                                                            <option value="90">
-                                                                g. Jika kualitas seluruh kriteria telah terpenuhi (100%) dan terdapat
-                                                                beberapa upaya yang bisa dihargai dari pemenuhan kriteria tersebut
-                                                            </option>
-                                                            <option value="100">
-                                                                h. Jika kualitas seluruh kriteria telah terpenuhi (100%) dan terdapat upaya
-                                                                inovatif serta layak menjadi percontohan secara nasional
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                                 <div class="w-full md:w-1/6">
                                                     <label class="block mt-2 text-sm font-bold">
                                                         Skor

@@ -4,6 +4,7 @@ namespace App\Livewire\Subkomponen;
 
 use App\Models\Komponen;
 use App\Models\Subkomponen;
+use App\Models\TipeJawaban;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
@@ -16,18 +17,20 @@ class Index extends Component
 
     public $search = '';
     public $titleHistoryUrl = 'Sub Komponen';
-    public $idNya, $komponen_id, $kode, $pertanyaan, $nilai_subkomponen_max, $keterangan, $url_contoh;
+    public $idNya, $komponen_id, $kode, $tipe_jawaban_id, $pertanyaan, $nilai_subkomponen_max, $keterangan, $url_contoh;
     public $showForm = false;
     public $listKomponen = [];
+    public $listTipeJawaban = [];
 
     public function mount()
     {
         $this->listKomponen = Komponen::all();
+        $this->listTipeJawaban = TipeJawaban::all();
     }
 
     public function resetForm()
     {
-        $this->reset(['idNya', 'komponen_id', 'kode', 'pertanyaan', 'nilai_subkomponen_max', 'keterangan', 'url_contoh']);
+        $this->reset(['idNya', 'komponen_id', 'kode', 'tipe_jawaban_id', 'pertanyaan', 'nilai_subkomponen_max', 'keterangan', 'url_contoh']);
     }
 
     public function showCreateForm()
@@ -35,6 +38,7 @@ class Index extends Component
         $this->resetForm();
         $this->showForm = true;
         $this->listKomponen = Komponen::all();
+        $this->listTipeJawaban = TipeJawaban::all();
     }
 
     public function showEditForm($id = '')
@@ -43,6 +47,7 @@ class Index extends Component
         $subkomponen = Subkomponen::findOrFail($this->idNya);
         $this->komponen_id = $subkomponen->komponen_id;
         $this->kode = $subkomponen->kode;
+        $this->tipe_jawaban_id = $subkomponen->tipe_jawaban_id;
         $this->pertanyaan = $subkomponen->pertanyaan;
         $this->nilai_subkomponen_max = $subkomponen->nilai_subkomponen_max;
         $this->keterangan = $subkomponen->keterangan;
@@ -60,6 +65,7 @@ class Index extends Component
     {
         $rules = [
             'komponen_id' => 'required|integer',
+            'tipe_jawaban_id' => 'required|integer',
             'pertanyaan' => 'required|string|max:255',
             'nilai_subkomponen_max' => 'required|numeric|min:0|max:100',
         ];
@@ -76,6 +82,7 @@ class Index extends Component
             ['id' => $this->idNya],
             [
                 'komponen_id' => $this->komponen_id,
+                'tipe_jawaban_id' => $this->tipe_jawaban_id,
                 'kode' => $this->kode,
                 'pertanyaan' => $this->pertanyaan,
                 'nilai_subkomponen_max' => $this->nilai_subkomponen_max,
@@ -142,7 +149,7 @@ class Index extends Component
 
     public function render()
     {
-        $subkomponens = Subkomponen::with('komponen')
+        $subkomponens = Subkomponen::with(['komponen', 'tipeJawaban'])
             ->where('kode', 'like', "%{$this->search}%")
             ->orWhere('pertanyaan', 'like', "%{$this->search}%")
             ->orderBy('id')
