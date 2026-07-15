@@ -19,13 +19,13 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LKEExport;
 
-#[Layout('components.layouts.app', ['title' => 'Penilaian Sakip'])]
+#[Layout('components.layouts.app', ['title' => 'Penilaian AKIP'])]
 class Index extends Component
 {
     use WithPagination;
 
     public $search = '';
-    public $titleHistoryUrl = 'Penilaian Sakip';
+    public $titleHistoryUrl = 'Penilaian AKIP';
     public $idNya, $userNya, $listPeriode, $listOpd, $listPenilai, $periode_id, $opd_id, $user_id, $penilai_id, $status, $tgl_submit_opd;
     public $showForm = false;
     public $showGroupForm = false;
@@ -364,15 +364,15 @@ class Index extends Component
     public function cutOffGroup()
     {
         $this->validate([
-            'periode_id'     => 'required|integer',
-            'status'         => 'required',
+            'periode_id' => 'required|integer',
+            'status' => 'required',
             'tgl_submit_opd' => 'required',
         ]);
 
         $this->js(<<<'JS'
             Swal.fire({
                 title: "Are you sure?",
-                text: "Apakah anda ingin Cutoff penilaian Sakip periode ini? proses ini tidak dapat dikembalikan.",
+                text: "Apakah anda ingin Cutoff penilaian AKIP periode ini? proses ini tidak dapat dikembalikan.",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -414,14 +414,14 @@ class Index extends Component
     public function pengumumanGroup()
     {
         $this->validate([
-            'periode_id'     => 'required|integer',
-            'status'         => 'required',
+            'periode_id' => 'required|integer',
+            'status' => 'required',
         ]);
 
         $this->js(<<<'JS'
             Swal.fire({
                 title: "Are you sure?",
-                text: "Apakah anda ingin mengubah status penilaian Sakip periode ini? proses ini tidak dapat dikembalikan.",
+                text: "Apakah anda ingin mengubah status penilaian AKIP periode ini? proses ini tidak dapat dikembalikan.",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -527,7 +527,7 @@ class Index extends Component
             ];
         }
 
-        $filename = 'LKE_SAKIP_' . $penilaianOpd->opd->nama_opd . '_' . $penilaianOpd->periode->tahun . '.xlsx';
+        $filename = 'LKE_AKIP_' . $penilaianOpd->opd->nama_opd . '_' . $penilaianOpd->periode->tahun . '.xlsx';
 
         return Excel::download(new LKEExport($penilaianOpd, $dataAspeks), $filename);
     }
@@ -542,7 +542,7 @@ class Index extends Component
         $this->js(<<<'JS'
             Swal.fire({
                 title: "Are you sure?",
-                text: "Apakah anda ingin menghapus penilaian Sakip periode ini? proses ini tidak dapat dikembalikan.",
+                text: "Apakah anda ingin menghapus penilaian AKIP periode ini? proses ini tidak dapat dikembalikan.",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -643,7 +643,7 @@ class Index extends Component
                 ->whereColumn('periodes.id', 'penilaian_opds.periode_id'), 'desc')
             ->orderBy('nilai_by_penilai', 'desc')
             ->orderBy('tgl_submit_opd', 'asc')
-            ->paginate(39); //Di sesuaikan dengan jumlah OPD yang di evaluasi
+            ->paginate(10); //Di sesuaikan dengan jumlah OPD yang di evaluasi
 
         // Cek status apakah Pengumuman atau tidak
         $statusPengumuman = Penilaian_opd::where('user_id', auth()->user()->id)

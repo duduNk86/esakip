@@ -1,7 +1,7 @@
 <div>
 
     <div class="px-4 mt-10">
-        <h2 class="text-xl font-bold mb-2 text-center">Hasil Penilaian Sakip Perangkat Daerah [{{ $filteredTahun }}]
+        <h2 class="text-xl font-bold mb-2 text-center">Hasil Penilaian AKIP Perangkat Daerah [{{ $filteredTahun }}]
         </h2>
         <div class="bg-white p-6 rounded shadow w-full h-[400px]">
             <canvas id="myBarChartOpd" class="w-full h-full"></canvas>
@@ -44,7 +44,7 @@
                                     font: {
                                         weight: 'bold'
                                     },
-                                    formatter: function(value, context) {
+                                    formatter: function (value, context) {
                                         const index = context.dataIndex;
                                         const predikat = data.predikats[index] || '';
                                         return value + ' (' + predikat + ')';
@@ -52,7 +52,7 @@
                                 },
                                 tooltip: { // INI ADALAH BAGIAN UNTUK TOOLTIP
                                     callbacks: {
-                                        label: function(context) {
+                                        label: function (context) {
                                             let label = context.dataset.label || '';
                                             if (label) {
                                                 label += ': ';

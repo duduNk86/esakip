@@ -14,7 +14,7 @@
         <div class="max-w-full mx-auto mt-0 px-0 py-5 bg-white shadow rounded">
             <div class="p-6" style="margin-top:-30px;">
 
-                <h2 class="text-xl font-semibold mb-4">Penilaian Sakip</h2>
+                <h2 class="text-xl font-semibold mb-4">Penilaian AKIP</h2>
 
                 {{-- Tombol & Pencarian --}}
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
@@ -483,19 +483,19 @@
                                     {{-- Aksi --}}
                                     <td class="border border-gray-200 relative px-4 py-2 align-top">
                                         <div x-data="{
-                                            open: false,
-                                            dropUp: false,
-                                            toggle() {
-                                                this.open = !this.open;
-                                                this.$nextTick(() => {
-                                                    const dropdown = this.$refs.dropdown;
-                                                    const rect = dropdown.getBoundingClientRect();
-                                                    const spaceBelow = window.innerHeight - rect.top;
+                                                                                                                    open: false,
+                                                                                                                    dropUp: false,
+                                                                                                                    toggle() {
+                                                                                                                        this.open = !this.open;
+                                                                                                                        this.$nextTick(() => {
+                                                                                                                            const dropdown = this.$refs.dropdown;
+                                                                                                                            const rect = dropdown.getBoundingClientRect();
+                                                                                                                            const spaceBelow = window.innerHeight - rect.top;
 
-                                                    this.dropUp = spaceBelow < 200;
-                                                });
-                                            }
-                                        }"
+                                                                                                                            this.dropUp = spaceBelow < 200;
+                                                                                                                        });
+                                                                                                                    }
+                                                                                                                }"
                                             class="relative inline-flex items-center justify-center w-full h-full">
                                             <!-- Tombol -->
                                             <button @click="toggle()"
@@ -509,21 +509,19 @@
                                             </button>
 
                                             <!-- Dropdown -->
-                                            <div x-show="open" x-ref="dropdown" @click.away="open = false"
-                                                x-transition :class="dropUp ? 'bottom-full mb-2' : 'top-full mt-2'"
+                                            <div x-show="open" x-ref="dropdown" @click.away="open = false" x-transition
+                                                :class="dropUp ? 'bottom-full mb-2' : 'top-full mt-2'"
                                                 class="absolute left-0 min-w-max max-h-70 overflow-auto bg-white rounded shadow z-50">
 
                                                 <div class="py-1 text-sm text-gray-700">
                                                     <!-- Dropdown item -->
                                                     {{-- Edit Data --}}
                                                     @if (auth()->user()?->role === 'superadmin')
-                                                        <a @click="open = false"
-                                                            wire:click="showEditForm('{{ $encryptedId }}')"
+                                                        <a @click="open = false" wire:click="showEditForm('{{ $encryptedId }}')"
                                                             href="#"
                                                             class="flex items-center gap-2 px-4 py-2 hover:bg-blue-100 text-blue-500">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path
                                                                     d="m2.695 14.762-1.262 3.155a.5.5 0 0 0 .65.65l3.155-1.262a4 4 0 0 0 1.343-.886L17.5 5.501a2.121 2.121 0 0 0-3-3L3.58 13.419a4 4 0 0 0-.885 1.343Z" />
                                                             </svg>
@@ -533,13 +531,11 @@
 
                                                     {{-- Klaim LKE oleh Penilai --}}
                                                     @if (auth()->user()?->role === 'penilai' && $penilaianopd->penilai_id === null && $penilaianopd->status === 'Penilaian')
-                                                        <a @click="open = false"
-                                                            wire:click="klaimLke('{{ $encryptedId }}')"
+                                                        <a @click="open = false" wire:click="klaimLke('{{ $encryptedId }}')"
                                                             href="#"
                                                             class="flex items-center gap-2 px-4 py-2 hover:bg-orange-100 text-orange-500">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path fill-rule="evenodd"
                                                                     d="M11 2a1 1 0 1 0-2 0v6.5a.5.5 0 0 1-1 0V3a1 1 0 1 0-2 0v5.5a.5.5 0 0 1-1 0V5a1 1 0 1 0-2 0v7a7 7 0 1 0 14 0V8a1 1 0 1 0-2 0v3.5a.5.5 0 0 1-1 0V3a1 1 0 1 0-2 0v5.5a.5.5 0 0 1-1 0V2Z"
                                                                     clip-rule="evenodd" />
@@ -549,15 +545,16 @@
                                                     @endif
 
                                                     {{-- Isi dan Nilai LKE --}}
-                                                    @if (auth()->user()?->role === 'superadmin' ||
+                                                    @if (
+                                                            auth()->user()?->role === 'superadmin' ||
                                                             (auth()->user()?->role === 'penilai' &&
                                                                 $penilaianopd->penilai_id === auth()->user()?->id &&
-                                                                $penilaianopd->status === 'Penilaian'))
+                                                                $penilaianopd->status === 'Penilaian')
+                                                        )
                                                         <a href="{{ route('evaluasi.index', ['penilaian_opd_id' => $encryptedId]) }}"
                                                             class="flex items-center gap-2 px-4 py-2 hover:bg-orange-100 text-orange-500">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path fill-rule="evenodd"
                                                                     d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM12.75 12a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V18a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V12Z"
                                                                     clip-rule="evenodd" />
@@ -567,13 +564,15 @@
                                                             Nilai LKE
                                                         </a>
                                                     @elseif (auth()->user()?->role === 'user' && $penilaianopd->status === 'SAQ')
-                                                        @if (now()->between(
-                                                                $penilaianopd->periode->tgl_start,
-                                                                \Carbon\Carbon::parse($penilaianopd->periode->tgl_end)->endOfDay()))
+                                                        @if (
+                                                                now()->between(
+                                                                    $penilaianopd->periode->tgl_start,
+                                                                    \Carbon\Carbon::parse($penilaianopd->periode->tgl_end)->endOfDay()
+                                                                )
+                                                            )
                                                             <a href="{{ route('evaluasi.index', ['penilaian_opd_id' => $encryptedId]) }}"
                                                                 class="flex items-center gap-2 px-4 py-2 hover:bg-orange-100 text-orange-500">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="h-5 w-5" fill="none"
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path fill-rule="evenodd"
                                                                         d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM12.75 12a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V18a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V12Z"
@@ -586,15 +585,29 @@
                                                         @endif
                                                     @endif
 
+                                                    {{-- Lihat LKE untuk Role Viewer --}}
+                                                    @if (auth()->user()?->role === 'viewer')
+                                                        <a href="{{ route('evaluasi.index', ['penilaian_opd_id' => $encryptedId]) }}"
+                                                            class="flex items-center gap-2 px-4 py-2 hover:bg-orange-100 text-orange-500">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                                class="size-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                            </svg>
+                                                            LKE
+                                                        </a>
+                                                    @endif
+
                                                     {{-- Kirim LKE --}}
                                                     @if (auth()->user()?->role === 'superadmin' || (auth()->user()?->role === 'user' && $penilaianopd->status === 'SAQ'))
-                                                        <a @click="open = false"
-                                                            wire:click="kirimLke('{{ $encryptedId }}')"
+                                                        <a @click="open = false" wire:click="kirimLke('{{ $encryptedId }}')"
                                                             href="#"
                                                             class="flex items-center gap-2 px-4 py-2 hover:bg-cyan-100 text-cyan-500">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path
                                                                     d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
                                                             </svg>
@@ -603,17 +616,17 @@
                                                     @endif
 
                                                     {{-- Final LKE --}}
-                                                    @if (auth()->user()?->role === 'superadmin' ||
+                                                    @if (
+                                                            auth()->user()?->role === 'superadmin' ||
                                                             (auth()->user()?->role === 'penilai' &&
                                                                 $penilaianopd->penilai_id === auth()->user()?->id &&
-                                                                $penilaianopd->status === 'Penilaian'))
-                                                        <a @click="open = false"
-                                                            wire:click="finalLke('{{ $encryptedId }}')"
+                                                                $penilaianopd->status === 'Penilaian')
+                                                        )
+                                                        <a @click="open = false" wire:click="finalLke('{{ $encryptedId }}')"
                                                             href="#"
                                                             class="flex items-center gap-2 px-4 py-2 hover:bg-green-100 text-green-500">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path fill-rule="evenodd"
                                                                     d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
                                                                     clip-rule="evenodd" />
@@ -623,7 +636,8 @@
                                                     @endif
 
                                                     {{-- Print LKE --}}
-                                                    @if (auth()->user()?->role === 'superadmin' ||
+                                                    @if (
+                                                            auth()->user()?->role === 'superadmin' ||
                                                             ((auth()->user()?->role === 'penilai' &&
                                                                 ($penilaianopd->penilai_id === auth()->user()?->id) === $penilaianopd->penilai_id &&
                                                                 $penilaianopd->status === 'Final') ||
@@ -632,14 +646,13 @@
                                                                     $penilaianopd->status === 'Pengumuman') ||
                                                                     (auth()->user()?->role === 'viewer' &&
                                                                         $penilaianopd->penilai_id != null &&
-                                                                        $penilaianopd->status === 'Final'))))
-                                                        <a @click="open = false"
-                                                            wire:click="printLKE('{{ $encryptedId }}')"
+                                                                        $penilaianopd->status === 'Final')))
+                                                        )
+                                                        <a @click="open = false" wire:click="printLKE('{{ $encryptedId }}')"
                                                             href="#"
                                                             class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path fill-rule="evenodd"
                                                                     d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 0 0 3 3h.27l-.155 1.705A1.875 1.875 0 0 0 7.232 22.5h9.536a1.875 1.875 0 0 0 1.867-2.045l-.155-1.705h.27a3 3 0 0 0 3-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0 0 18 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM16.5 6.205v-2.83A.375.375 0 0 0 16.125 3h-8.25a.375.375 0 0 0-.375.375v2.83a49.353 49.353 0 0 1 9 0Zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 0 1-.374.409H7.232a.375.375 0 0 1-.374-.409l.526-5.784a.373.373 0 0 1 .333-.337 41.741 41.741 0 0 1 8.566 0Zm.967-3.97a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H18a.75.75 0 0 1-.75-.75V10.5ZM15 9.75a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75V10.5a.75.75 0 0 0-.75-.75H15Z"
                                                                     clip-rule="evenodd" />
@@ -649,7 +662,8 @@
                                                     @endif
 
                                                     {{-- Download Excel LKE --}}
-                                                    @if (auth()->user()?->role === 'superadmin' ||
+                                                    @if (
+                                                            auth()->user()?->role === 'superadmin' ||
                                                             ((auth()->user()?->role === 'penilai' &&
                                                                 ($penilaianopd->penilai_id === auth()->user()?->id) === $penilaianopd->penilai_id &&
                                                                 $penilaianopd->status === 'Final') ||
@@ -658,13 +672,12 @@
                                                                     $penilaianopd->status === 'Pengumuman') ||
                                                                     (auth()->user()?->role === 'viewer' &&
                                                                         $penilaianopd->penilai_id != null &&
-                                                                        $penilaianopd->status === 'Final'))))
-                                                        <a wire:click="exportLKE('{{ $encryptedId }}')"
-                                                            href="#"
+                                                                        $penilaianopd->status === 'Final')))
+                                                        )
+                                                        <a wire:click="exportLKE('{{ $encryptedId }}')" href="#"
                                                             class="flex items-center gap-2 px-4 py-2 hover:bg-fuchsia-100 text-fuchsia-500">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                                             </svg>
@@ -675,12 +688,10 @@
                                                     {{-- Delete LKE --}}
                                                     @if (auth()->user()?->role === 'superadmin')
                                                         <a @click="open = false"
-                                                            wire:click.prevent="delete('{{ $encryptedId }}')"
-                                                            href="#"
+                                                            wire:click.prevent="delete('{{ $encryptedId }}')" href="#"
                                                             class="flex items-center gap-2 px-4 py-2 hover:bg-red-100 text-red-500">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                                fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path fill-rule="evenodd"
                                                                     d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z"
                                                                     clip-rule="evenodd" />
@@ -697,10 +708,12 @@
                                         {{ ($penilaianopds->currentPage() - 1) * $penilaianopds->perPage() + $loop->iteration }}
                                     </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-center">
-                                        {{ $penilaianopd->periode->tahun }}</td>
+                                        {{ $penilaianopd->periode->tahun }}
+                                    </td>
                                     <td
                                         class="border border-gray-200 px-4 py-2 max-w-[200px] break-words whitespace-normal text-justify align-top">
-                                        {{ $penilaianopd->opd->nama_singkat_opd }}</td>
+                                        {{ $penilaianopd->opd->nama_singkat_opd }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-center">
                                         @php
                                             $status = $penilaianopd->status;
@@ -719,158 +732,226 @@
                                     </td>
 
                                     {{-- <td
-                                    class="border border-gray-200 px-4 py-2 align-top text-right {{ ($penilaianopd->pm_a1_s ?? 0) == 0 ? 'text-red-500' : '' }}">
-                                    {{ $penilaianopd->pm_a1_s ?? '' }}
-                                </td> --}}
+                                        class="border border-gray-200 px-4 py-2 align-top text-right {{ ($penilaianopd->pm_a1_s ?? 0) == 0 ? 'text-red-500' : '' }}">
+                                        {{ $penilaianopd->pm_a1_s ?? '' }}
+                                    </td> --}}
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_a1_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_a1_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_a1_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_a1_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_a2_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_a2_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_a2_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_a2_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_a3_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_a3_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_a3_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_a3_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_a_skor ?? '' }}</td>
+                                        {{ $penilaianopd->pm_a_skor ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_a_nilai ?? '' }}</td>
+                                        {{ $penilaianopd->pm_a_nilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_b1_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_b1_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_b1_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_b1_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_b2_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_b2_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_b2_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_b2_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_b3_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_b3_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_b3_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_b3_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_b_skor ?? '' }}</td>
+                                        {{ $penilaianopd->pm_b_skor ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_b_nilai ?? '' }}</td>
+                                        {{ $penilaianopd->pm_b_nilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_c1_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_c1_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_c1_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_c1_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_c2_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_c2_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_c2_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_c2_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_c3_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_c3_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_c3_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_c3_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_c_skor ?? '' }}</td>
+                                        {{ $penilaianopd->pm_c_skor ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_c_nilai ?? '' }}</td>
+                                        {{ $penilaianopd->pm_c_nilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_d1_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_d1_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_d1_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_d1_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_d2_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_d2_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_d2_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_d2_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_d3_s ?? '' }}</td>
+                                        {{ $penilaianopd->pm_d3_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_d3_n ?? '' }}</td>
+                                        {{ $penilaianopd->pm_d3_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_d_skor ?? '' }}</td>
+                                        {{ $penilaianopd->pm_d_skor ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->pm_d_nilai ?? '' }}</td>
+                                        {{ $penilaianopd->pm_d_nilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right font-bold">
-                                        {{ $penilaianopd->skor_by_opd ?? '' }}</td>
+                                        {{ $penilaianopd->skor_by_opd ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right font-bold">
-                                        {{ $penilaianopd->nilai_by_opd ?? '' }}</td>
+                                        {{ $penilaianopd->nilai_by_opd ?? '' }}
+                                    </td>
 
                                     {{-- <td
-                                    class="border border-gray-200 px-4 py-2 align-top text-right {{ ($penilaianopd->ev_a1_s ?? 0) == 0 ? 'text-red-500' : '' }}">
-                                    {{ $penilaianopd->ev_a1_s ?? '' }}
-                                </td> --}}
+                                        class="border border-gray-200 px-4 py-2 align-top text-right {{ ($penilaianopd->ev_a1_s ?? 0) == 0 ? 'text-red-500' : '' }}">
+                                        {{ $penilaianopd->ev_a1_s ?? '' }}
+                                    </td> --}}
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_a1_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_a1_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_a1_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_a1_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_a2_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_a2_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_a2_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_a2_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_a3_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_a3_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_a3_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_a3_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_a_skor ?? '' }}</td>
+                                        {{ $penilaianopd->ev_a_skor ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_a_nilai ?? '' }}</td>
+                                        {{ $penilaianopd->ev_a_nilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_b1_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_b1_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_b1_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_b1_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_b2_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_b2_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_b2_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_b2_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_b3_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_b3_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_b3_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_b3_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_b_skor ?? '' }}</td>
+                                        {{ $penilaianopd->ev_b_skor ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_b_nilai ?? '' }}</td>
+                                        {{ $penilaianopd->ev_b_nilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_c1_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_c1_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_c1_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_c1_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_c2_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_c2_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_c2_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_c2_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_c3_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_c3_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_c3_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_c3_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_c_skor ?? '' }}</td>
+                                        {{ $penilaianopd->ev_c_skor ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_c_nilai ?? '' }}</td>
+                                        {{ $penilaianopd->ev_c_nilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_d1_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_d1_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_d1_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_d1_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_d2_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_d2_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_d2_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_d2_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_d3_s ?? '' }}</td>
+                                        {{ $penilaianopd->ev_d3_s ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_d3_n ?? '' }}</td>
+                                        {{ $penilaianopd->ev_d3_n ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_d_skor ?? '' }}</td>
+                                        {{ $penilaianopd->ev_d_skor ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right">
-                                        {{ $penilaianopd->ev_d_nilai ?? '' }}</td>
+                                        {{ $penilaianopd->ev_d_nilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right font-bold">
-                                        {{ $penilaianopd->skor_by_penilai ?? '' }}</td>
+                                        {{ $penilaianopd->skor_by_penilai ?? '' }}
+                                    </td>
                                     <td class="border border-gray-200 px-4 py-2 align-top text-right font-bold">
-                                        {{ $penilaianopd->nilai_by_penilai ?? '' }}</td>
+                                        {{ $penilaianopd->nilai_by_penilai ?? '' }}
+                                    </td>
 
                                     <td class="border border-gray-200 px-4 py-2 align-top text-center">
                                         @if ($penilaianopd->status === 'Final' || $penilaianopd->status === 'Pengumuman')
@@ -879,19 +960,19 @@
                                                 $predikat = $penilaianopd->predikat;
                                                 $badgeClass = match ($predikat) {
                                                     'AA'
-                                                        => 'border border-emerald-500 px-2 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-white',
+                                                    => 'border border-emerald-500 px-2 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-white',
                                                     'A'
-                                                        => 'border border-lime-500 px-2 py-1 rounded-full text-xs font-semibold bg-lime-500 text-white',
+                                                    => 'border border-lime-500 px-2 py-1 rounded-full text-xs font-semibold bg-lime-500 text-white',
                                                     'BB'
-                                                        => 'border border-sky-500 px-2 py-1 rounded-full text-xs font-semibold bg-sky-500 text-white',
+                                                    => 'border border-sky-500 px-2 py-1 rounded-full text-xs font-semibold bg-sky-500 text-white',
                                                     'B'
-                                                        => 'border border-cyan-500 px-2 py-1 rounded-full text-xs font-semibold bg-cyan-500 text-white',
+                                                    => 'border border-cyan-500 px-2 py-1 rounded-full text-xs font-semibold bg-cyan-500 text-white',
                                                     'CC'
-                                                        => 'border border-amber-500 px-2 py-1 rounded-full text-xs font-semibold bg-amber-500 text-white',
+                                                    => 'border border-amber-500 px-2 py-1 rounded-full text-xs font-semibold bg-amber-500 text-white',
                                                     'C'
-                                                        => 'border border-yellow-500 px-2 py-1 rounded-full text-xs font-semibold bg-yellow-500 text-white',
+                                                    => 'border border-yellow-500 px-2 py-1 rounded-full text-xs font-semibold bg-yellow-500 text-white',
                                                     'D'
-                                                        => 'border border-red-500 px-2 py-1 rounded-full text-xs font-semibold bg-red-500 text-white',
+                                                    => 'border border-red-500 px-2 py-1 rounded-full text-xs font-semibold bg-red-500 text-white',
                                                     default => '',
                                                 };
                                             @endphp
@@ -928,95 +1009,96 @@
                                             @endif
                                         </td>
                                         <td class="border border-gray-200 px-4 py-2 align-top">
-                                            {{ $penilaianopd->penilai->name ?? '' }}</td>
+                                            {{ $penilaianopd->penilai->name ?? '' }}
+                                        </td>
                                     @endif
 
                                     {{-- <td class="px-4 py-2 relative">
-                                    <div x-data="{ open: false }" class="relative inline-block text-left">
-                                        <!-- Tombol utama -->
-                                        <button @click="open = !open"
-                                            class="text-gray-600 hover:text-black focus:outline-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                viewBox="0 0 24 24" class="w-5 h-5">
-                                                <path
-                                                    d="M5.625 3.75a2.625 2.625 0 1 0 0 5.25h12.75a2.625 2.625 0 0 0 0-5.25H5.625ZM3.75 11.25a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5H3.75ZM3 15.75a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75ZM3.75 18.75a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5H3.75Z" />
-                                            </svg>
-                                        </button>
+                                        <div x-data="{ open: false }" class="relative inline-block text-left">
+                                            <!-- Tombol utama -->
+                                            <button @click="open = !open"
+                                                class="text-gray-600 hover:text-black focus:outline-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                    viewBox="0 0 24 24" class="w-5 h-5">
+                                                    <path
+                                                        d="M5.625 3.75a2.625 2.625 0 1 0 0 5.25h12.75a2.625 2.625 0 0 0 0-5.25H5.625ZM3.75 11.25a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5H3.75ZM3 15.75a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75ZM3.75 18.75a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5H3.75Z" />
+                                                </svg>
+                                            </button>
 
-                                        <!-- Dropdown -->
-                                        <div x-show="open" @click.away="open = false" x-transition
-                                            class="absolute right-0 bottom-full mb-2 min-w-max max-h-60 overflow-auto bg-white rounded shadow z-50">
-                                            <div class="py-1 text-sm text-gray-700">
-                                                <a @click="open = false"
-                                                    wire:click="showEditForm('{{ $encryptedId }}')" href="#"
-                                                    class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path
-                                                            d="m2.695 14.762-1.262 3.155a.5.5 0 0 0 .65.65l3.155-1.262a4 4 0 0 0 1.343-.886L17.5 5.501a2.121 2.121 0 0 0-3-3L3.58 13.419a4 4 0 0 0-.885 1.343Z" />
-                                                    </svg>
-                                                    Edit
-                                                </a>
-                                                <a @click="open = false"
-                                                    wire:click="showDetail('{{ $encryptedId }}')" href="#"
-                                                    class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM12.75 12a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V18a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V12Z"
-                                                            clip-rule="evenodd" />
-                                                        <path
-                                                            d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
-                                                    </svg>
-                                                    Isi LKE
-                                                </a>
-                                                <a @click="open = false"
-                                                    wire:click="showDetail('{{ $encryptedId }}')" href="#"
-                                                    class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path
-                                                            d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
-                                                    </svg>
-                                                    Kirim
-                                                </a>
-                                                <a @click="open = false"
-                                                    wire:click="showDetail('{{ $encryptedId }}')" href="#"
-                                                    class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                    Final
-                                                </a>
-                                                <a @click="open = false"
-                                                    wire:click="showDetail('{{ $encryptedId }}')" href="#"
-                                                    class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 0 0 3 3h.27l-.155 1.705A1.875 1.875 0 0 0 7.232 22.5h9.536a1.875 1.875 0 0 0 1.867-2.045l-.155-1.705h.27a3 3 0 0 0 3-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0 0 18 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM16.5 6.205v-2.83A.375.375 0 0 0 16.125 3h-8.25a.375.375 0 0 0-.375.375v2.83a49.353 49.353 0 0 1 9 0Zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 0 1-.374.409H7.232a.375.375 0 0 1-.374-.409l.526-5.784a.373.373 0 0 1 .333-.337 41.741 41.741 0 0 1 8.566 0Zm.967-3.97a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H18a.75.75 0 0 1-.75-.75V10.5ZM15 9.75a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75V10.5a.75.75 0 0 0-.75-.75H15Z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                    Print
-                                                </a>
-                                                <a @click="open = false"
-                                                    wire:click.prevent="delete('{{ $encryptedId }}')" href="#"
-                                                    class="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                    Delete
-                                                </a>
+                                            <!-- Dropdown -->
+                                            <div x-show="open" @click.away="open = false" x-transition
+                                                class="absolute right-0 bottom-full mb-2 min-w-max max-h-60 overflow-auto bg-white rounded shadow z-50">
+                                                <div class="py-1 text-sm text-gray-700">
+                                                    <a @click="open = false" wire:click="showEditForm('{{ $encryptedId }}')"
+                                                        href="#"
+                                                        class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path
+                                                                d="m2.695 14.762-1.262 3.155a.5.5 0 0 0 .65.65l3.155-1.262a4 4 0 0 0 1.343-.886L17.5 5.501a2.121 2.121 0 0 0-3-3L3.58 13.419a4 4 0 0 0-.885 1.343Z" />
+                                                        </svg>
+                                                        Edit
+                                                    </a>
+                                                    <a @click="open = false" wire:click="showDetail('{{ $encryptedId }}')"
+                                                        href="#"
+                                                        class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875ZM12.75 12a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V18a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V12Z"
+                                                                clip-rule="evenodd" />
+                                                            <path
+                                                                d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+                                                        </svg>
+                                                        Isi LKE
+                                                    </a>
+                                                    <a @click="open = false" wire:click="showDetail('{{ $encryptedId }}')"
+                                                        href="#"
+                                                        class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path
+                                                                d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+                                                        </svg>
+                                                        Kirim
+                                                    </a>
+                                                    <a @click="open = false" wire:click="showDetail('{{ $encryptedId }}')"
+                                                        href="#"
+                                                        class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        Final
+                                                    </a>
+                                                    <a @click="open = false" wire:click="showDetail('{{ $encryptedId }}')"
+                                                        href="#"
+                                                        class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 0 0 3 3h.27l-.155 1.705A1.875 1.875 0 0 0 7.232 22.5h9.536a1.875 1.875 0 0 0 1.867-2.045l-.155-1.705h.27a3 3 0 0 0 3-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0 0 18 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM16.5 6.205v-2.83A.375.375 0 0 0 16.125 3h-8.25a.375.375 0 0 0-.375.375v2.83a49.353 49.353 0 0 1 9 0Zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 0 1-.374.409H7.232a.375.375 0 0 1-.374-.409l.526-5.784a.373.373 0 0 1 .333-.337 41.741 41.741 0 0 1 8.566 0Zm.967-3.97a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H18a.75.75 0 0 1-.75-.75V10.5ZM15 9.75a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75V10.5a.75.75 0 0 0-.75-.75H15Z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        Print
+                                                    </a>
+                                                    <a @click="open = false"
+                                                        wire:click.prevent="delete('{{ $encryptedId }}')" href="#"
+                                                        class="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-100">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        Delete
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td> --}}
+                                    </td> --}}
                                 </tr>
                             @empty
                                 <tr>
@@ -1030,6 +1112,9 @@
                         {{ $penilaianopds->links() }}
                     </div>
 
+                </div>
+                <div class="mt-2 p-2 text-sm bg-yellow-100 border border-yellow-300 rounded w-full md:w-1/4">
+                    <b>Keterangan :</b> Geser ke kanan untuk melihat detail seluruh kolom Tabel
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Daftar Nilai Evaluasi SAKIP Tahun {{ $tahun }}</title>
+    <title>Daftar Nilai Evaluasi AKIP Tahun {{ $tahun }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,7 +61,7 @@
 
 <body>
     <div class="header">
-        <h1>Daftar Nilai Evaluasi SAKIP Perangkat Daerah</h1>
+        <h1>Daftar Nilai Evaluasi AKIP Perangkat Daerah</h1>
         <h1>Kabupaten Wonosobo Tahun {{ $tahun }}</h1>
     </div>
 

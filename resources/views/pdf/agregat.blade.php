@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Agregat Nilai Evaluasi SAKIP Tahun {{ $tahunMulai }} - {{ $tahunSampai }}</title>
+    <title>Agregat Nilai Evaluasi AKIP Tahun {{ $tahunMulai }} - {{ $tahunSampai }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,7 +46,7 @@
 </head>
 
 <body>
-    <h1>Agregat Nilai Evaluasi SAKIP Tahun {{ $tahunMulai }} - {{ $tahunSampai }}</h1>
+    <h1>Agregat Nilai Evaluasi AKIP Tahun {{ $tahunMulai }} - {{ $tahunSampai }}</h1>
 
     <table>
         <thead>

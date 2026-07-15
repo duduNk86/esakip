@@ -24,13 +24,13 @@
                 </div>
 
                 <div x-data x-init="@if (session()->has('message')) Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session('message') }}',
-                showConfirmButton: false,
-                timer: 3000
-            }); @endif">
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ session('message') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                }); @endif">
                 </div>
 
                 <div class="w-full overflow-x-auto">
@@ -38,7 +38,7 @@
                         <thead class="bg-gray-100 text-left text-sm font-semibold">
                             <tr class="border-t">
                                 <th class="px-4 py-2">#</th>
-                                <th class="px-4 py-2">Nama Opd</th>
+                                <th class="px-4 py-2">Nama Perangkat Daerah</th>
                                 <th class="px-4 py-2">Singkatan</th>
                                 <th class="px-4 py-2">Aksi</th>
                             </tr>
@@ -88,8 +88,7 @@
 
             </div>
 
-            <div x-data
-                x-on:confirm-delete.window="Swal.fire({
+            <div x-data x-on:confirm-delete.window="Swal.fire({
                 title: 'Hapus Opd?',
                 text: 'Tindakan ini tidak bisa dibatalkan!',
                 icon: 'warning',

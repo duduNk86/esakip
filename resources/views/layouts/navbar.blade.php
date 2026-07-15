@@ -23,34 +23,40 @@ new class extends Component {
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     {{-- <a href="{{ route('dashboard.index') }}" wire:navigate> --}}
-                    <a href="{{ route('dashboard.index') }}">
-                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
-                        <img src="{{ asset('global_assets/images/PENAKsE Icon.png') }}" alt="Logo" class="h-9 w-auto">
-                    </a>
+                        <a href="{{ route('dashboard.index') }}">
+                            {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
+                            <img src="{{ asset('global_assets/images/PENAKsE Icon.png') }}" alt="Logo"
+                                class="h-9 w-auto">
+                        </a>
                 </div>
 
                 <!-- Dashboard -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')" wire:navigate>
-                        {{-- <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')"> --}}
-                        <div class="flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M15.5 2A1.5 1.5 0 0 0 14 3.5v13a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 16.5 2h-1ZM9.5 6A1.5 1.5 0 0 0 8 7.5v9A1.5 1.5 0 0 0 9.5 18h1a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 10.5 6h-1ZM3.5 10A1.5 1.5 0 0 0 2 11.5v5A1.5 1.5 0 0 0 3.5 18h1A1.5 1.5 0 0 0 6 16.5v-5A1.5 1.5 0 0 0 4.5 10h-1Z" />
-                                {{-- <path
-                                    d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
-                                <path
-                                    d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" /> --}}
-                            </svg>
-                            <span>{{ __('Dashboard') }}</span>
-                        </div>
-                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')"
+                        wire:navigate>
+                        {{-- <x-nav-link :href="route('dashboard.index')"
+                            :active="request()->routeIs('dashboard.index')"> --}}
+                            <div class="flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700"
+                                    viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.5 2A1.5 1.5 0 0 0 14 3.5v13a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 16.5 2h-1ZM9.5 6A1.5 1.5 0 0 0 8 7.5v9A1.5 1.5 0 0 0 9.5 18h1a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 10.5 6h-1ZM3.5 10A1.5 1.5 0 0 0 2 11.5v5A1.5 1.5 0 0 0 3.5 18h1A1.5 1.5 0 0 0 6 16.5v-5A1.5 1.5 0 0 0 4.5 10h-1Z" />
+                                    {{--
+                                    <path
+                                        d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                                    <path
+                                        d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                                    --}}
+                                </svg>
+                                <span>{{ __('Dashboard') }}</span>
+                            </div>
+                        </x-nav-link>
                 </div>
 
                 {{-- Penilaian Sakip --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-12 sm:flex">
-                    <x-nav-link :href="route('penilaianopd.index')" :active="request()->routeIs('penilaianopd.index')" wire:navigate>
+                    <x-nav-link :href="route('penilaianopd.index')" :active="request()->routeIs('penilaianopd.index')"
+                        wire:navigate>
                         <div class="flex items-center space-x-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" viewBox="0 0 24 24"
                                 fill="currentColor">
@@ -67,10 +73,11 @@ new class extends Component {
                 {{-- Reporting --}}
                 @if (auth()->user()?->role != 'user')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-12 sm:flex">
-                        <x-nav-link :href="route('reporting.index')" :active="request()->routeIs('reporting.index')" wire:navigate>
+                        <x-nav-link :href="route('reporting.index')" :active="request()->routeIs('reporting.index')"
+                            wire:navigate>
                             <div class="flex items-center space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700"
-                                    viewBox="0 0 24 24" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" viewBox="0 0 24 24"
+                                    fill="currentColor">
                                     <path fill-rule="evenodd"
                                         d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 0 0 3 3h.27l-.155 1.705A1.875 1.875 0 0 0 7.232 22.5h9.536a1.875 1.875 0 0 0 1.867-2.045l-.155-1.705h.27a3 3 0 0 0 3-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0 0 18 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM16.5 6.205v-2.83A.375.375 0 0 0 16.125 3h-8.25a.375.375 0 0 0-.375.375v2.83a49.353 49.353 0 0 1 9 0Zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 0 1-.374.409H7.232a.375.375 0 0 1-.374-.409l.526-5.784a.373.373 0 0 1 .333-.337 41.741 41.741 0 0 1 8.566 0Zm.967-3.97a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H18a.75.75 0 0 1-.75-.75V10.5ZM15 9.75a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75V10.5a.75.75 0 0 0-.75-.75H15Z"
                                         clip-rule="evenodd" />
@@ -179,6 +186,18 @@ new class extends Component {
                                                     d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
                                             </svg>
                                             <span>{{ __('Sub-Komponen') }}</span>
+                                        </a>
+                                        <a href="{{ route('tipejawaban.index') }}"
+                                            class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 space-x-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700"
+                                                viewBox="0 0 24 24" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M9 1.5H5.625c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5Zm6.61 10.936a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 14.47a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                                                    clip-rule="evenodd" />
+                                                <path
+                                                    d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                                            </svg>
+                                            <span>{{ __('Tipe Jawaban') }}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -302,7 +321,8 @@ new class extends Component {
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')" wire:navigate>
+            <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')"
+                wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
@@ -310,7 +330,8 @@ new class extends Component {
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                <div class="font-medium text-base text-gray-800"
+                    x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
                     x-on:profile-updated.window="name = $event.detail.name"></div>
                 <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
             </div>

@@ -169,7 +169,6 @@
         <div class="bg-gray-800 bg-opacity-60">
             <div class="container mx-auto text-center py-32">
                 <h1 class="text-4xl font-bold text-white mb-2">Penilaian Akuntabilitas Kinerja secara Elektronik
-                    (PENAKs'E)
                 </h1>
                 <h1 class="text-3xl font-bold text-white mb-6">Pemerintah Kabupaten Wonosobo</h1>
                 <p class="text-xl text-gray-200 mb-8"><i>" Performance Accountability is Key "</i></p>
@@ -362,17 +361,17 @@
         // Inisialisasi dengan tahun saat ini sebagai default awal
         let lastFilteredTahun = new Date().getFullYear();
 
-        openFilterModalBtn.onclick = function() {
+        openFilterModalBtn.onclick = function () {
             filterModal.style.display = 'flex';
             // Mengisi input modal dengan tahun terakhir yang difilter
             modalTahunInput.value = lastFilteredTahun;
         }
 
-        closeButton.onclick = function() {
+        closeButton.onclick = function () {
             filterModal.style.display = 'none';
         }
 
-        applyFilterBtn.onclick = function() {
+        applyFilterBtn.onclick = function () {
             const selectedTahun = modalTahunInput.value;
 
             // Simple validation (menggunakan SweetAlert seperti sebelumnya)
@@ -396,7 +395,7 @@
         }
 
         // --- Event Listener untuk Tombol Reset ---
-        resetFilterButton.onclick = function() {
+        resetFilterButton.onclick = function () {
             Livewire.dispatch('tahunFilterUpdated', {
                 tahun: null
             });
@@ -415,15 +414,15 @@
             <h2 class="text-4xl font-bold text-gray-800 mb-8 mt-6">Galeri</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
                 @foreach ($galeryData as $row)
-                    <div class="flex flex-col items-center">
-                        <img src="{{ route('helper.show-picture', ['path' => $row->filename]) }}"
-                            data-description="{{ $row->keterangan }}" onclick="openModal(this)"
-                            class="cursor-pointer rounded-xl shadow-md hover:shadow-xl transition-transform duration-300 transform hover:scale-110 hover:-translate-y-2"
-                            style="width:400px; height:230px;" title="Click for View">
-                        <p class="text-gray-600 mt-4 mb-2" style="font-size: 9pt;">
-                            <b>[ <i>{{ $row->keterangan }}</i> ]</b>
-                        </p>
-                    </div>
+                <div class="flex flex-col items-center">
+                    <img src="{{ route('helper.show-picture', ['path' => $row->filename]) }}"
+                        data-description="{{ $row->keterangan }}" onclick="openModal(this)"
+                        class="cursor-pointer rounded-xl shadow-md hover:shadow-xl transition-transform duration-300 transform hover:scale-110 hover:-translate-y-2"
+                        style="width:400px; height:230px;" title="Click for View">
+                    <p class="text-gray-600 mt-4 mb-2" style="font-size: 9pt;">
+                        <b>[ <i>{{ $row->keterangan }}</i> ]</b>
+                    </p>
+                </div>
                 @endforeach
             </div>
         </div>
@@ -465,8 +464,8 @@
                             href="mailto: inspektoratkabwonosobo@gmail.com"
                             class="no-underline hover:underline hover:text-gray-300">
                             inspektoratkabwonosobo@gmail.com</a>
-                        <br> <i class="fa-solid fa-globe mr-1 mb-2"></i> <a
-                            href="https://inspektorat.wonosobokab.go.id" target="_blank"
+                        <br> <i class="fa-solid fa-globe mr-1 mb-2"></i> <a href="https://inspektorat.wonosobokab.go.id"
+                            target="_blank"
                             class="no-underline hover:underline hover:text-gray-300">https://inspektorat.wonosobokab.go.id</a>
                         <br> <i class="fa-solid fa-map-location-dot mr-1 mb-2"></i> <a
                             href="https://maps.app.goo.gl/qbtvLwGe4KoaiLjKA" target="_blank"
@@ -522,8 +521,7 @@
     </footer>
 
     <!-- Back to Top -->
-    <a href="#"
-        class="back-to-top fixed bottom-3 right-5 hidden bg-green-600 text-white p-2 rounded-full shadow-lg">
+    <a href="#" class="back-to-top fixed bottom-3 right-5 hidden bg-green-600 text-white p-2 rounded-full shadow-lg">
         <i class="fa-solid fa-chevron-up"></i>
     </a>
 
@@ -548,7 +546,7 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/id.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/advancedFormat.js"></script>
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('menu-toggle').addEventListener('click', function () {
             var menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
@@ -558,10 +556,10 @@
         $.ajax({
             url: 'https://api.wonosobokab.go.id/api/news',
             type: 'GET',
-            success: function(response) {
+            success: function (response) {
                 var beritaContainer = $('#beritacontent');
                 beritaContainer.empty();
-                response.forEach(function(item) {
+                response.forEach(function (item) {
 
                     var beritaItem = `<div
                             class="flex flex-col items-center rounded-lg shadow-md hover:shadow-xl transition-transform duration-300 transform hover:scale-110 hover:-translate-y-2">
@@ -590,7 +588,7 @@
                     console.log(item);
                 });
             },
-            error: function(error) {
+            error: function (error) {
                 console.log('Error:', error);
             }
         });
@@ -629,7 +627,8 @@
     </script>
 
     <!-- Modal -->
-    {{-- <script>
+    {{--
+    <script>
         function openModal(imgElement) {
             const modal = document.getElementById('imageModal');
             const modalImage = document.getElementById('modalImage');
@@ -648,7 +647,7 @@
             }, 10);
         }
 
-        document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('closeModal').addEventListener('click', function () {
             const modal = document.getElementById('imageModal');
 
             // Add transition effects
@@ -661,7 +660,7 @@
             }, 300);
         });
 
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
             const modal = document.getElementById('imageModal');
             if (event.target === modal) {
                 modal.style.opacity = '0';
@@ -982,7 +981,7 @@
             James = {};
         }
         James.Selector = {};
-        James.Selector.mouseup = function() {
+        James.Selector.mouseup = function () {
             var userSelection;
             if (window.getSelection) {
                 userSelection = window.getSelection();
@@ -997,11 +996,11 @@
                 speachmobile(textvalue);
             }
         };
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(document).bind("mouseup", James.Selector.mouseup);
         });
-        $(document).ready(function() {
-            document.addEventListener("selectionchange", function(event) {
+        $(document).ready(function () {
+            document.addEventListener("selectionchange", function (event) {
                 var voicecek = localStorage.getItem("permismobile");
                 if (voicecek != null && voicecek == "on") {
                     const selection = window.getSelection();
@@ -1153,7 +1152,7 @@
             var is_safari = navigator.userAgent.indexOf("Safari") > -1;
             var userAgent = window.navigator.userAgent,
                 platform =
-                window.navigator?.userAgentData?.platform || window.navigator.platform,
+                    window.navigator?.userAgentData?.platform || window.navigator.platform,
                 macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"],
                 windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"],
                 iosPlatforms = ["iPhone", "iPad", "iPod"],
@@ -1171,11 +1170,11 @@
             }
             return os;
         }
-        $(".open-toolbar").click(function(event) {
+        $(".open-toolbar").click(function (event) {
             var stickyToolbarContainer = document.querySelector(".toolbar-disabilitas");
             stickyToolbarContainer.classList.toggle("show-toolbar");
         });
-        $("#checklang").on("change", function() {
+        $("#checklang").on("change", function () {
             changelang(this);
         });
 
@@ -1304,11 +1303,11 @@
         function replacetext(groups, arrayjs) {
             var namedatainput = '[class="contenttoolbar_disabilitas"]';
             var namedatainput2 = "div";
-            var listgroupselector = groups.map(function(group) {
+            var listgroupselector = groups.map(function (group) {
                 return group.querySelector(namedatainput);
             });
-            var listdata = listgroupselector.map(function(group) {
-                return Array.from(group.querySelectorAll(namedatainput2)).map(function(
+            var listdata = listgroupselector.map(function (group) {
+                return Array.from(group.querySelectorAll(namedatainput2)).map(function (
                     item
                 ) {
                     return item;
@@ -1349,13 +1348,13 @@
             }
         }
 
-        $("#ratatulisan").click(function(event) {
+        $("#ratatulisan").click(function (event) {
             if (arrayratatulisan.length > 0) {
                 if (arrayratatulisan[0] == 1) {
                     arrayratatulisan.length = 0;
                     arrayratatulisan.push(2);
                     ratatulisan(langdefault[0]);
-                    $('*:not(".btn-color-mode-switch-inner, *")').each(function(i, item) {
+                    $('*:not(".btn-color-mode-switch-inner, *")').each(function (i, item) {
                         $(item).cssImportant("text-align", "left");
 
                         if ($(item).css("flex-direction") == "row") {
@@ -1370,7 +1369,7 @@
 
                     ratatulisan(langdefault[0]);
 
-                    $('*:not(".btn-color-mode-switch-inner")').each(function(i, item) {
+                    $('*:not(".btn-color-mode-switch-inner")').each(function (i, item) {
                         $(item).cssImportant("text-align", "center");
                         if ($(item).css("flex-direction") == "row") {
                             $(item).cssImportant("justify-content", "center");
@@ -1380,7 +1379,7 @@
                     arrayratatulisan.length = 0;
                     arrayratatulisan.push(4);
                     ratatulisan(langdefault[0]);
-                    $('*:not(".btn-color-mode-switch-inner")').each(function(i, item) {
+                    $('*:not(".btn-color-mode-switch-inner")').each(function (i, item) {
                         $(item).cssImportant("text-align", "right");
                         if ($(item).css("flex-direction") == "row") {
                             $(item).cssImportant("justify-content", "flex-end");
@@ -1391,7 +1390,7 @@
                     arrayratatulisan.length = 0;
                     ratatulisan(langdefault[0]);
 
-                    $('*:not(".btn-color-mode-switch-inner")').each(function(i, item) {
+                    $('*:not(".btn-color-mode-switch-inner")').each(function (i, item) {
                         $(item).cssImportant("text-align", "");
                         if ($(item).css("flex-direction") == "row") {
                             $(item).cssImportant("justify-content", "");
@@ -1404,7 +1403,7 @@
                     arrayratatulisan.push(1);
                     ratatulisan(langdefault[0]);
 
-                    $('*:not(".btn-color-mode-switch-inner")').each(function(i, item) {
+                    $('*:not(".btn-color-mode-switch-inner")').each(function (i, item) {
                         $(item).cssImportant("text-align", "left");
                         if ($(item).css("flex-direction") == "row") {
                             $(item).cssImportant("justify-content", "flex-start");
@@ -1418,7 +1417,7 @@
                 arrayratatulisan.push(1);
                 ratatulisan(langdefault[0]);
 
-                $('*:not(".btn-color-mode-switch-inner")').each(function(i, item) {
+                $('*:not(".btn-color-mode-switch-inner")').each(function (i, item) {
                     $(item).cssImportant("text-align", "left");
                     if ($(item).css("flex-direction") == "row") {
                         $(item).cssImportant("justify-content", "flex-start");
@@ -1427,7 +1426,7 @@
             }
 
             $(".contenttoolbar_disabilitas *,div.titletools,.open-toolbar").each(
-                function(i, item) {
+                function (i, item) {
                     $(item).cssImportant("text-align", "");
                     $(item).cssImportant("justify-content", "");
                 }
@@ -1438,7 +1437,7 @@
         var zoomLevel = 1;
         var rootFontSize = 12;
         var groups = Array.from(document.querySelectorAll("#groupcekmenu"));
-        $("#increasetext").click(function(event) {
+        $("#increasetext").click(function (event) {
             // tracking_fitur_disabilitas('Perbesar Text');
             var listdatagroup = cekclassactive(groups, "increasetext");
 
@@ -1449,7 +1448,7 @@
                 "font-size": rootFontSize + "px",
             });
         });
-        $("#decreasetext").click(function(event) {
+        $("#decreasetext").click(function (event) {
             //  tracking_fitur_disabilitas('Perkecil Text');
             $("#resetdisabilitas").removeClass("subtitletoolsactive");
             $("#resetdisabilitas").addClass("subtitletools");
@@ -1467,7 +1466,7 @@
                 });
             }, 100);
         });
-        $("#readablefont").on("click", function(event) {
+        $("#readablefont").on("click", function (event) {
             //  tracking_fitur_disabilitas('Tulisan Dapat Di Baca');
             var listdatagroup = cekclassactive(groups, "readablefont");
             if (listdatagroup.getclass.classactiv == "active") {
@@ -1491,8 +1490,8 @@
                 });
             }
         });
-        jQuery(document).ready(function() {
-            jQuery.fn.cssImportant = function(name, value) {
+        jQuery(document).ready(function () {
+            jQuery.fn.cssImportant = function (name, value) {
                 const $this = this;
                 const applyStyles = (n, v) => {
                     // Convert style name from camelCase to dashed-case.
@@ -1500,7 +1499,7 @@
                         return m1 + "-" + upper.toLowerCase() + m2;
                     });
                     // Loop over each element in the selector and set the styles.
-                    $this.each(function() {
+                    $this.each(function () {
                         this.style.setProperty(dashedName, v, "important");
                     });
                 };
@@ -1519,7 +1518,7 @@
             };
         });
 
-        $("#hcontrash").click(function(event) {
+        $("#hcontrash").click(function (event) {
             //   tracking_fitur_disabilitas('Warna');
 
             var listdatagroup = cekclassactive(groups, "hcontrash", "on");
@@ -1527,7 +1526,7 @@
                 $(".navbar-inverse2").css("background-color", "rgb(0, 0, 0)");
                 $(
                     '*:not(".btn-color-mode-switch-inner,.mycheckbox,.Vue-Toastification__container")'
-                ).each(function(i, item) {
+                ).each(function (i, item) {
                     var color = $(item).css("color");
                     $(item).cssImportant("background-color", "black");
 
@@ -1544,7 +1543,7 @@
                         links[i].style.color = "#00f3f7 !important";
                     }
                 }
-                $("h1,h2,h3,h4,h5").each(function(i, item) {
+                $("h1,h2,h3,h4,h5").each(function (i, item) {
                     var color = $(item).css("color");
                     $(item).cssImportant("color", "white");
 
@@ -1553,11 +1552,11 @@
                     $(item).cssImportant("background", "black");
                 });
 
-                $("* > div").each(function(i, item) {
+                $("* > div").each(function (i, item) {
                     var color = $(item).css("color");
                 });
 
-                $("*>button, * > p").each(function(i, item) {
+                $("*>button, * > p").each(function (i, item) {
                     var color = $(item).css("color");
 
                     $(item).cssImportant("background-color", "black");
@@ -1565,7 +1564,7 @@
                     $(item).cssImportant("background", "black");
                 });
 
-                $("*>a").each(function(i, item) {
+                $("*>a").each(function (i, item) {
                     var color = $(item).css("color");
 
                     $(item).cssImportant("background-color", "black");
@@ -1575,11 +1574,11 @@
                 changecolordisabilitas(groups);
                 hoveractive();
 
-                $("#groupcekmenu > *, .bodytools path").each(function(i, item) {
+                $("#groupcekmenu > *, .bodytools path").each(function (i, item) {
                     $(item).cssImportant("color", "#00f3f7");
                 });
             } else {
-                $("*").each(function(i, item) {
+                $("*").each(function (i, item) {
                     var color = $(item).css("color");
                     $(item).css({
                         "background-color": "",
@@ -1597,11 +1596,11 @@
         function changecolordisabilitas(groups) {
             var namedatainput = '[class="bodytools"]';
             var namedatainput2 = '[class="aksestexttools"]';
-            var listgroupselector = groups.map(function(group) {
+            var listgroupselector = groups.map(function (group) {
                 return group.querySelector(namedatainput);
             });
-            var listdata = listgroupselector.map(function(group) {
-                return Array.from(group.querySelectorAll(namedatainput2)).map(function(
+            var listdata = listgroupselector.map(function (group) {
+                return Array.from(group.querySelectorAll(namedatainput2)).map(function (
                     item
                 ) {
                     return item;
@@ -1623,14 +1622,14 @@
                 }
             }
         }
-        $("#ncontrash").click(function(event) {
+        $("#ncontrash").click(function (event) {
             //  tracking_fitur_disabilitas('Klise');
             var listdatagroup = cekclassactive(groups, "ncontrash");
             if (listdatagroup.getclass.classactiv == "active") {
                 $(".navbar-inverse2").css("background-color", "rgb(0, 0, 0)");
                 $(
                     '*:not(".btn-color-mode-switch-inner,.mycheckbox,.Vue-Toastification__container")'
-                ).each(function(i, item) {
+                ).each(function (i, item) {
                     var color = $(item).css("color");
                     $(item).cssImportant("background-color", "black");
                     $(item).cssImportant("color", "yellow");
@@ -1641,7 +1640,7 @@
                 ).cssImportant("border-color", "white");
                 hoveractive();
             } else {
-                $("*").each(function(i, item) {
+                $("*").each(function (i, item) {
                     var color = $(item).css("color");
                     $(item).css({
                         "background-color": "",
@@ -1657,7 +1656,7 @@
         });
 
         function hoveractive() {
-            $("* > a").hover(function(e) {
+            $("* > a").hover(function (e) {
                 if (e.type === "mouseenter") {
                     $(this).css({
                         "background-color": "#c23616",
@@ -1673,7 +1672,7 @@
         }
 
         function hovernoactive() {
-            $("* > a").hover(function(e) {
+            $("* > a").hover(function (e) {
                 // console.log(e.type);
                 if (e.type === "mouseenter") {
                     $(this).css({
@@ -1688,11 +1687,11 @@
                 }
             });
         }
-        $("#lgcontrash").click(function(event) {
+        $("#lgcontrash").click(function (event) {
             //  tracking_fitur_disabilitas('Penerangan');
             var listdatagroup = cekclassactive(groups, "lgcontrash");
             if (listdatagroup.getclass.classactiv == "active") {
-                $("*").each(function(i, item) {
+                $("*").each(function (i, item) {
                     var color = $(item).css("color");
                     $(item).css({
                         "background-color": "",
@@ -1718,7 +1717,7 @@
 
                 hovernoactive();
             } else {
-                $("*").each(function(i, item) {
+                $("*").each(function (i, item) {
                     var color = $(item).css("color");
                     $(item).css({
                         "background-color": "",
@@ -1733,7 +1732,7 @@
             }
             // resetcss();
         });
-        $("#linkunderline").click(function(event) {
+        $("#linkunderline").click(function (event) {
             //    tracking_fitur_disabilitas('Garis Bawahi Tautan');
             var listdatagroup = cekclassactive(groups, "linkunderline");
             if (listdatagroup.getclass.classactiv == "active") {
@@ -1758,7 +1757,7 @@
                 });
             }
         });
-        $("#egrayscale").on("click", function(event) {
+        $("#egrayscale").on("click", function (event) {
             //('Skala Abu-abu');
             var listdatagroup = cekclassactive(groups, "egrayscale");
             // console.log("grey");
@@ -1769,7 +1768,7 @@
             }
         });
 
-        $("#resetdisabilitas").click(function(event) {
+        $("#resetdisabilitas").click(function (event) {
             //    tracking_fitur_disabilitas('Mengatur Ulang');
             var listdatagroup = cekclassactive(groups, "resetdisabilitas");
             if (listdatagroup.getclass.classactiv == "active") {
@@ -1785,7 +1784,7 @@
             arrayratatulisan.length = 0;
             arrayratatulisan.push(0);
 
-            $("*").each(function(i, item) {
+            $("*").each(function (i, item) {
                 var color = $(item).css("color");
                 $(item).css({
                     "background-color": "",
@@ -1797,7 +1796,7 @@
                     "font-family": "",
                 });
             });
-            $("a").hover(function(e) {
+            $("a").hover(function (e) {
                 //console.log(e.type);
                 if (e.type === "mouseenter") {
                     $(this).css({
@@ -1819,7 +1818,7 @@
             });
 
             rootFontSize = 20;
-            $('*:not(".btn-color-mode-switch-inner")').each(function(i, item) {
+            $('*:not(".btn-color-mode-switch-inner")').each(function (i, item) {
                 $(item).cssImportant("text-align", "");
                 $(item).cssImportant("justify-content", "");
             });
@@ -1854,11 +1853,11 @@
             }
             var namedatainput = '[class="bodytools"]';
             var namedatainput2 = "div";
-            var listgroupselector = groups.map(function(group) {
+            var listgroupselector = groups.map(function (group) {
                 return group.querySelector(namedatainput);
             });
-            var listdata = listgroupselector.map(function(group) {
-                return Array.from(group.querySelectorAll(namedatainput2)).map(function(
+            var listdata = listgroupselector.map(function (group) {
+                return Array.from(group.querySelectorAll(namedatainput2)).map(function (
                     item
                 ) {
                     return item;
@@ -1924,7 +1923,7 @@
                     listdatall.push(loopmulti);
                 }
             }
-            var cekactiveclass = listdatall.filter(function(group) {
+            var cekactiveclass = listdatall.filter(function (group) {
                 return group.id == idhtml;
             });
             var returndata = {
@@ -1935,7 +1934,7 @@
         }
 
 
-        $("#webspeach").click(function(event) {
+        $("#webspeach").click(function (event) {
             // tracking_fitur_disabilitas('Moda Suara');
             var listdatagroup = cekclassactive(groups, "webspeach");
             if (listdatagroup.getclass.classactiv == "active") {
@@ -1950,7 +1949,7 @@
         });
 
 
-        $("#mobileapp").click(function(event) {
+        $("#mobileapp").click(function (event) {
             //     tracking_fitur_disabilitas('Moda Suara Mobile Apps');
             var listdatagroup = cekclassactive(groups, "mobileapp");
             if (listdatagroup.getclass.classactiv == "active") {
@@ -1966,14 +1965,14 @@
         localStorage.removeItem("permismobile");
         localStorage.removeItem("permisvoice");
 
-        $(document).on("mouseover", "a > *:not('.subtitletools')", function() {
+        $(document).on("mouseover", "a > *:not('.subtitletools')", function () {
             var textvalue = $(this).text().toString();
             // console.log(textvalue);
             speach(textvalue);
             speachmobile(textvalue);
         });
 
-        $(document).on("mouseover", "a:not('.subtitletools')", function() {
+        $(document).on("mouseover", "a:not('.subtitletools')", function () {
             var textvalue = $(this).text().toString();
             // console.log(textvalue);
             speach(textvalue);
@@ -1983,11 +1982,11 @@
         if (getOS() == "Windows" || getOS() == "Mac OS") {
             var namedatainput = '[class="bodytools"]';
             var namedatainput2 = "div";
-            var listgroupselector = groups.map(function(group) {
+            var listgroupselector = groups.map(function (group) {
                 return group.querySelector(namedatainput);
             });
-            var listdata = listgroupselector.map(function(group) {
-                return Array.from(group.querySelectorAll(namedatainput2)).map(function(
+            var listdata = listgroupselector.map(function (group) {
+                return Array.from(group.querySelectorAll(namedatainput2)).map(function (
                     item
                 ) {
                     return item;
@@ -2001,7 +2000,7 @@
                     var tagid = "#" + listdata[i][k].id;
 
                     if (tagid == "#ratatulisan") {
-                        $(tagid).click(function() {
+                        $(tagid).click(function () {
                             var mytext = $(this).text();
                             callfunction(mytext);
                         });
@@ -2009,18 +2008,18 @@
                 }
             }
 
-            $(document).on("mouseover", ".subtitletools", function() {
+            $(document).on("mouseover", ".subtitletools", function () {
                 var textvalue = $(this).text().toString();
                 callfunction(textvalue);
             });
         } else {
             var namedatainput = '[class="bodytools"]';
             var namedatainput2 = "div";
-            var listgroupselector = groups.map(function(group) {
+            var listgroupselector = groups.map(function (group) {
                 return group.querySelector(namedatainput);
             });
-            var listdata = listgroupselector.map(function(group) {
-                return Array.from(group.querySelectorAll(namedatainput2)).map(function(
+            var listdata = listgroupselector.map(function (group) {
+                return Array.from(group.querySelectorAll(namedatainput2)).map(function (
                     item
                 ) {
                     return item;
@@ -2035,13 +2034,13 @@
                     var notagid = listdata[i][k].id;
 
                     if (tagid != "#resetdisabilitas" && tagid != "#mobileapp") {
-                        $(tagid).click(function() {
+                        $(tagid).click(function () {
                             var mytext = $(this).text();
                             callfunction(mytext);
                         });
                     }
                     if (notagid == "resetdisabilitas") {
-                        $(document).on("mouseover", ".subtitletools", function() {
+                        $(document).on("mouseover", ".subtitletools", function () {
                             var textvalue = $(this).text().toString();
                             callmobile(textvalue);
                         });

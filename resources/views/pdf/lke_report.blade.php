@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LKE Report</title>
+    <title>LKE AKIP Report</title>
     <style>
         body {
             font-family: 'DejaVu Sans', sans-serif;
@@ -174,7 +174,7 @@
 <body>
     <div class="header">
         <h1>LEMBAR KERJA EVALUASI</h1>
-        <p>PENILAIAN AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (SAKIP)</p>
+        <p>PENILAIAN AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (AKIP)</p>
         <p>{{ strtoupper($penilaianOpd->opd->nama_opd) }}</p>
     </div>
 
@@ -228,8 +228,8 @@
                 <tr>
                     <th>Predikat</th>
                     <td>: @if ($penilaianOpd->predikat === 'AA')
-                            AA (Sangat Memuaskan)
-                        @elseif($penilaianOpd->predikat === 'A')
+                        AA (Sangat Memuaskan)
+                    @elseif($penilaianOpd->predikat === 'A')
                             A (Memuaskan)
                         @elseif($penilaianOpd->predikat === 'BB')
                             BB (Sangat Baik)
@@ -329,9 +329,11 @@
                             {{ $aspek['kode'] }}</strong></td>
                     <td colspan="1"></td>
                     <td class="text-center" style="color:red;">
-                        {{ $penilaianOpd->{'pm_' . strtolower($aspek['kode']) . '_skor'} }}</td>
+                        {{ $penilaianOpd->{'pm_' . strtolower($aspek['kode']) . '_skor'} }}
+                    </td>
                     <td class="text-center" style="color:red;">
-                        {{ $penilaianOpd->{'ev_' . strtolower($aspek['kode']) . '_skor'} }}</td>
+                        {{ $penilaianOpd->{'ev_' . strtolower($aspek['kode']) . '_skor'} }}
+                    </td>
                     <td colspan="2"></td>
                 </tr>
                 {{-- Rekapitulasi Nilai per Aspek (Mandiri dan Penilai) --}}
@@ -340,9 +342,11 @@
                             {{ $aspek['kode'] }}</strong></td>
                     <td colspan="1"></td>
                     <td class="text-center" style="color:red;">
-                        {{ $penilaianOpd->{'pm_' . strtolower($aspek['kode']) . '_nilai'} }}</td>
+                        {{ $penilaianOpd->{'pm_' . strtolower($aspek['kode']) . '_nilai'} }}
+                    </td>
                     <td class="text-center" style="color:red;">
-                        {{ $penilaianOpd->{'ev_' . strtolower($aspek['kode']) . '_nilai'} }}</td>
+                        {{ $penilaianOpd->{'ev_' . strtolower($aspek['kode']) . '_nilai'} }}
+                    </td>
                     <td colspan="2"></td>
                 </tr>
             @endforeach

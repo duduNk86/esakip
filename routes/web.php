@@ -13,6 +13,7 @@ use App\Livewire\Appsetup\Index as AppsetupIndex;
 use App\Livewire\Aspek\Index as AspekIndex;
 use App\Livewire\Komponen\Index as KomponenIndex;
 use App\Livewire\Subkomponen\Index as SubkomponenIndex;
+use App\Livewire\Tipejawaban\Index as TipejawabanIndex;
 use App\Livewire\Penilaianopd\Index as PenilaianopdIndex;
 use App\Livewire\Evaluasi\Index as EvaluasiIndex;
 use App\Livewire\Reporting\Index as ReportingIndex;
@@ -53,6 +54,9 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 
     // Sakip - Sub Komponen
     Route::get('/subkomponen', SubkomponenIndex::class)->name('subkomponen.index');
+
+    // Sakip - Tipe Jawaban
+    Route::get('/tipejawaban', TipejawabanIndex::class)->name('tipejawaban.index');
 
     // Opds
     Route::get('/opd', OpdIndex::class)->name('opd.index');

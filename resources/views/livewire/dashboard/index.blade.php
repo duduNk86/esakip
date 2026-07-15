@@ -80,7 +80,7 @@
                             <div class="p-2 mx-4">
                                 <marquee direction="left">
                                     <h6 class="text-base">
-                                        ~ Periode Pengisian <i>Lembar Kerja Evaluasi</i> (LKE) Sakip Perangkat
+                                        ~ Periode Pengisian <i>Lembar Kerja Evaluasi</i> (LKE) AKIP Perangkat
                                         Daerah Di Lingkungan Pemerintah Kabupaten Wonosobo Tahun
                                         {{ $pengumumanOpdTahun }} dimulai
                                         tanggal
@@ -103,7 +103,8 @@
 
     {{-- Success/Error Flash Message (pastikan Anda memiliki ini di layout utama jika ingin di luar komponen) --}}
     @if (session()->has('error'))
-        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition:leave.duration.500ms
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+            x-transition:leave.duration.500ms
             class="fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg border-l-4 bg-red-100 border-red-400 text-red-700"
             role="alert">
             <div class="flex items-center">
@@ -112,7 +113,8 @@
         </div>
     @endif
     @if (session('success'))
-        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition:leave.duration.500ms
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+            x-transition:leave.duration.500ms
             class="fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg border-l-4 bg-green-100 border-green-400 text-green-700"
             role="alert">
             <div class="flex items-center">

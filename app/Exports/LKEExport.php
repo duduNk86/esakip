@@ -37,8 +37,8 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
         // --- Bagian Header Laporan ---
         // Baris 1: LEMBAR KERJA EVALUASI
         $rows->push(['LEMBAR KERJA EVALUASI']);
-        // Baris 2: SISTEM AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (SAKIP)
-        $rows->push(['SISTEM AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (SAKIP)']);
+        // Baris 2: PENILAIAN AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (AKIP)
+        $rows->push(['PENILAIAN AKUNTABILITAS KINERJA INSTANSI PEMERINTAH (AKIP)']);
         // Baris 3: TAHUN XXXX
         $rows->push([strtoupper($this->penilaianOpd->opd->nama_opd)]);
         // $rows->push(['TAHUN ' . $this->penilaianOpd->periode->tahun]);
@@ -270,19 +270,19 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate(); // Dapatkan objek sheet PhpSpreadsheet
-
+    
                 // --- Styling Global ---
                 $sheet->getDefaultRowDimension()->setRowHeight(-1); // Auto height
                 $sheet->getStyle('A:I')->getAlignment()->setWrapText(true); // Wrap text untuk semua kolom
                 $sheet->getStyle('A:I')->getFont()->setSize(9); // Default font size
-
+    
                 // --- Styling Header Laporan (Baris 1-3) ---
                 $sheet->mergeCells('A1:I1');
                 $sheet->mergeCells('A2:I2');
                 $sheet->mergeCells('A3:I3');
                 $sheet->getStyle('A1:A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
                 $sheet->getStyle('A1:A3')->getFont()->setBold(true)->setSize(14); // Ukuran font lebih besar untuk judul utama
-
+    
                 // --- Styling Summary Table (Baris 5-9) ---
                 $summaryStartRow = 5;
                 $summaryEndRow = 8;
@@ -292,12 +292,12 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
                 $sheet->mergeCells('B' . ($summaryStartRow + 1) . ':D' . ($summaryStartRow + 1)); // Disusun Oleh Value
                 $sheet->mergeCells('B' . ($summaryStartRow + 2) . ':D' . ($summaryStartRow + 2)); // Direviu Oleh Value
                 $sheet->mergeCells('B' . ($summaryStartRow + 3) . ':D' . ($summaryStartRow + 3)); // Disetujui Oleh Value
-
+    
                 $sheet->mergeCells('F' . $summaryStartRow . ':I' . $summaryStartRow); // Periode Evaluasi Value
                 $sheet->mergeCells('F' . ($summaryStartRow + 1) . ':I' . ($summaryStartRow + 1)); // Skor Evaluasi Value
                 $sheet->mergeCells('F' . ($summaryStartRow + 2) . ':I' . ($summaryStartRow + 2)); // Nilai Evaluasi Value
                 $sheet->mergeCells('F' . ($summaryStartRow + 3) . ':I' . ($summaryStartRow + 3)); // Predikat Value (Summary table)
-
+    
                 // Styling text di summary table
                 $sheet->getStyle('A' . $summaryStartRow . ':I' . $summaryEndRow)->getFont()->setSize(10);
                 $sheet->getStyle('A' . $summaryStartRow . ':A' . $summaryEndRow)->getFont()->setBold(true); // Label kiri bold
@@ -329,11 +329,11 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
                 // $sheet->getColumnDimension('G')->setWidth(8);  // Skor APIP
                 // $sheet->getColumnDimension('H')->setWidth(25); // Catatan
                 // $sheet->getColumnDimension('I')->setWidth(25); // Saran
-
+    
                 // --- Styling Data Tabel Utama dan Total (Looping dari $dataStartRow) ---
                 $dataStartRow = $mainTableHeaderRow2 + 1; // Data dimulai setelah header tabel utama
                 $dataEndRow = $sheet->getHighestRow(); // Ambil baris terakhir yang berisi data
-
+    
                 // Terapkan border untuk seluruh area tabel data
                 $sheet->getStyle('A' . $dataStartRow . ':I' . $dataEndRow)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
                 $sheet->getStyle('A' . $dataStartRow . ':I' . $dataEndRow)->getAlignment()->setVertical(Alignment::VERTICAL_TOP);
@@ -343,7 +343,7 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
                     $cellAValue = $sheet->getCell('A' . $row)->getValue();
                     $cellBValue = $sheet->getCell('B' . $row)->getValue();
                     $cellDValue = $sheet->getCell('D' . $row)->getValue(); // Untuk cek baris total
-
+    
                     // Styling Aspek (misal: 'A', 'B', ...)
                     if (preg_match('/^[A-Z]$/', $cellAValue) && str_contains($cellBValue, 'Bobot:')) {
                         $sheet->getStyle('A' . $row . ':I' . $row)->getFont()->setBold(true)->getColor()->setARGB(Color::COLOR_RED);
@@ -364,7 +364,7 @@ class LKEExport implements FromCollection, WithHeadings, WithMapping, ShouldAuto
 
                         $sheet->getStyle('A' . $row . ':I' . $row)->getFont()->setBold(true);
                         $sheet->getStyle('A' . $row . ':I' . $row)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFF0F0F0'); // Background abu-abu muda
-
+    
                         // Merge for "Skor Komponen", "Nilai Komponen", "Skor Aspek", "Nilai Aspek", "Total Skor", "Total Nilai"
                         // These all have their label in D and value in F/G.
                         // You want D:E merged for the label, and F:G for the value.

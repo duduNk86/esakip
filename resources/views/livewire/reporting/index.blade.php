@@ -18,7 +18,7 @@
                 {{-- Tombol untuk menampilkan/menyembunyikan form filter --}}
                 <div class="flex items-center mb-4 gap-2">
                     <button wire:click="showFilterDatalistForm"
-                        class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 inline-flex items-center gap-1">
+                        class="bg-blue-600 text-white px-3 py-2 text-sm rounded hover:bg-blue-700 inline-flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                             <path fill-rule="evenodd"
                                 d="M3 3.5A1.5 1.5 0 0 1 4.5 2h6.879a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 17 7.622V16.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 16.5v-13ZM13.25 9a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5a.75.75 0 0 1 .75-.75Zm-6.5 4a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-1.5 0v-.5a.75.75 0 0 1 .75-.75Zm4-1.25a.75.75 0 0 0-1.5 0v2.5a.75.75 0 0 0 1.5 0v-2.5Z"
@@ -27,7 +27,7 @@
                         Datalist
                     </button>
                     <button wire:click="showFilterAgregatForm"
-                        class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 inline-flex items-center gap-1">
+                        class="bg-green-600 text-white px-3 py-2 text-sm rounded hover:bg-green-700 inline-flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                             <path fill-rule="evenodd"
                                 d="M12.577 4.878a.75.75 0 0 1 .919-.53l4.78 1.281a.75.75 0 0 1 .531.919l-1.281 4.78a.75.75 0 0 1-1.449-.387l.81-3.022a19.407 19.407 0 0 0-5.594 5.203.75.75 0 0 1-1.139.093L7 10.06l-4.72 4.72a.75.75 0 0 1-1.06-1.061l5.25-5.25a.75.75 0 0 1 1.06 0l3.074 3.073a20.923 20.923 0 0 1 5.545-4.931l-3.042-.815a.75.75 0 0 1-.53-.919Z"
@@ -52,7 +52,7 @@
                             <div class="flex-1">
                                 {{-- <label class="block mb-2 font-bold">Filter Tahun</label> --}}
                                 <input type="text" wire:model="tahun"
-                                    placeholder="Masukkan Tahun Periode Evaluasi Sakip (Contoh: 2025)"
+                                    placeholder="Masukkan Tahun Periode Evaluasi AKIP (Contoh: 2025)"
                                     class="mt-1 w-full rounded-md border px-2.5 py-1.5 text-sm">
                                 @error('tahun')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -170,7 +170,7 @@
                     @if ($datalists !== null && $datalists->isNotEmpty())
                         <div class="w-full overflow-x-auto">
                             {{-- Gunakan $tahun dari properti Livewire --}}
-                            <h1 class="text-xl text-center font-bold mt-2 mb-3">Daftar Nilai Evaluasi SAKIP Tahun
+                            <h1 class="text-xl text-center font-bold mt-2 mb-3">Daftar Nilai Evaluasi AKIP Tahun
                                 {{ $tahun }}</h1>
                             <table class="w-full table-auto border">
                                 <thead class="bg-gray-100 text-center text-sm font-semibold border">
@@ -348,7 +348,7 @@
                     {{-- Tabel Agregat --}}
                     @if ($agregatData !== null && $agregatData->isNotEmpty())
                         <div class="w-full overflow-x-auto mt-8">
-                            <h1 class="text-xl text-center font-bold mt-2 mb-3">Agregat Nilai Evaluasi SAKIP Tahun
+                            <h1 class="text-xl text-center font-bold mt-2 mb-3">Agregat Nilai Evaluasi AKIP Tahun
                                 {{ $tahunMulai }} - {{ $tahunSampai }}</h1>
                             <table class="w-full table-auto border">
                                 <thead class="bg-gray-100 text-center text-sm font-semibold border">

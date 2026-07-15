@@ -1,7 +1,7 @@
 <div>
 
     <div class="px-4 mt-10">
-        <h2 class="text-xl font-bold mb-2 text-center">Statistik Hasil Penilaian Sakip</h2>
+        <h2 class="text-xl font-bold mb-2 text-center">Statistik Hasil Penilaian AKIP</h2>
         <div class="bg-white p-6 rounded shadow w-full h-[400px]">
             <canvas id="myUserLineChart" class="w-full h-full"></canvas>
         </div>
@@ -53,7 +53,7 @@
                                     font: {
                                         weight: 'bold'
                                     },
-                                    formatter: function(value, context) {
+                                    formatter: function (value, context) {
                                         const index = context.dataIndex;
                                         const predikat = data.predikats[index] || '';
                                         return value + ' (' + predikat + ')';
@@ -61,7 +61,7 @@
                                 },
                                 tooltip: {
                                     callbacks: {
-                                        label: function(context) {
+                                        label: function (context) {
                                             let label = context.dataset.label || '';
                                             if (label) {
                                                 label += ': ';

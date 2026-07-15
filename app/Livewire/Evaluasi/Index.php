@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Penilaian_opd;
 use Livewire\Attributes\Layout;
 
-#[Layout('components.layouts.app', ['title' => 'LKE'])]
+#[Layout('components.layouts.app', ['title' => 'LKE AKIP'])]
 class Index extends Component
 {
-    public $titleHistoryUrl = 'LKE Sakip';
+    public $titleHistoryUrl = 'LKE AKIP';
     public $penilaian_opd_id;
+    public $opd;
+    public $tahun_evaluasi;
     public $aspeks = [];
     public $jawaban_opd = [];
     public $skor_opd = [];
@@ -30,6 +32,9 @@ class Index extends Component
     public function mount($penilaian_opd_id)
     {
         $this->penilaian_opd_id = Crypt::decrypt($penilaian_opd_id);
+        $penilaianOpd = Penilaian_opd::with('opd','periode')->findOrFail($this->penilaian_opd_id);
+        $this->opd = $penilaianOpd->opd?->nama_opd;
+        $this->tahun_evaluasi = $penilaianOpd->periode?->tahun;
 
         $this->aspeks = Aspek::with('komponen.subkomponen')->orderBy('kode')->get();
 
@@ -235,7 +240,11 @@ class Index extends Component
             })
         JS);
 
-        return redirect()->route('penilaianopd.index');
+        /* Jika ingin reload kembali ke halaman List OPD yang melakukan Penilaian Sakip */
+        // return redirect()->route('penilaianopd.index');
+
+        /* Jika ingin reload kembali ke halaman Evaluasi OPD yang sedang diisi */
+        // return redirect()->route('evaluasi.index', Crypt::encrypt($this->penilaian_opd_id));
     }
 
     public function render()
